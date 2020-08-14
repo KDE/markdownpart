@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="addon">
+  <id>org.kde.markdownpart</id>
+  <!--
+    Appstream model currently does not support the idea of generic addons
+    See https://github.com/ximion/appstream/issues/157
+    As intermediate work-around some typical consumers are listed explicitely.
+  -->
+  <extends>org.kde.ark.desktop</extends>
+  <extends>org.kde.kate.desktop</extends>
+  <extends>org.kde.kdevelop.desktop</extends>
+  <extends>org.kde.krusader.desktop</extends>
+  <extends>org.kde.konqueror.desktop</extends>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL-2.1+</project_license>
+  <name>Markdown Viewer KPart</name>
+  <summary>Rendered display of Markdown files in KParts-using software</summary>
+  <description>
+    <p>The Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.</p>
+  </description>
+  <url type="homepage">https://commits.kde.org/markdownpart</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=markdownpart&amp;component=general</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=markdownpart</url>
+  <update_contact>kossebau_at_kde.org</update_contact>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://cdn.kde.org/screenshots/markdownpart/markdownpart.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <categories>
+    <category>Utility</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+</component>

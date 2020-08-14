@@ -1,0 +1,15 @@
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
+<gui name="markdownpart" version="1" translationDomain="markdownpart">
+
+<MenuBar>
+<Menu name="edit"><text>&amp;Edit</text>
+    <Action name="edit_copy" group="edit_paste_merge" />
+    <Action name="edit_select_all" group="edit_select_merge"/>
+    <Separator/>
+    <Action name="edit_find" group="edit_find_merge"/>
+    <Action name="edit_find_next" group="edit_find_merge"/>
+    <Action name="edit_find_prev" group="edit_find_merge"/>
+</Menu>
+</MenuBar>
+
+</gui>

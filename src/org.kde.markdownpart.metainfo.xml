@@ -18,7 +18,7 @@
   <description>
     <p>The Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.</p>
   </description>
-  <url type="homepage">https://invent.kde.org/utilities/markdownpart</url>
+  <url type="homepage">https://commits.kde.org/markdownpart</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=markdownpart&amp;component=general</url>
   <url type="donation">https://www.kde.org/community/donations/?app=markdownpart</url>
   <update_contact>kossebau_at_kde.org</update_contact>

@@ -42,8 +42,6 @@ QObject* MarkdownPartFactory::create(const char* iface,
         wantBrowserView ? MarkdownPart::BrowserViewModus :
         /* else */        MarkdownPart::ReadOnlyModus;
 
-    MarkdownPart* part = new MarkdownPart(parentWidget, parent, m_aboutData, modus);
-
-    return part;
+    return new MarkdownPart(parentWidget, parent, m_aboutData, modus);
 }
 

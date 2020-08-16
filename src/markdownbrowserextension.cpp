@@ -48,7 +48,9 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
                                                   const QUrl& linkUrl,
                                                   bool hasSelection)
 {
-    const bool forcesNewWindow = false;
+    // Compare KWebKitPart's WebView::contextMenuEvent & WebEnginePart's WebEngineView::contextMenuEvent
+    // for the patterns used to fill the menu.
+    // QTextBrowser at of Qt 5.15 provides less data though, so for now this is reduced variant.
 
     // Clear the previous collection entries first...
     m_contextMenuActionCollection->clear();
@@ -114,8 +116,9 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
     if (!mapAction.isEmpty()) {
         KParts::OpenUrlArguments args;
         args.setMimeType(mimeType);
+
         KParts::BrowserArguments bargs;
-        bargs.setForcesNewWindow(forcesNewWindow);
+        bargs.setForcesNewWindow(false);
 
         Q_EMIT popupMenu(globalPos, emitUrl, static_cast<mode_t>(-1), args, bargs, flags, mapAction);
     }

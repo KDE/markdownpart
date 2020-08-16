@@ -51,14 +51,17 @@ int MarkdownView::scrollPositionY() const
 
 void MarkdownView::contextMenuEvent(QContextMenuEvent* event)
 {
-    // default menu arguments
-    bool hasSelection = false;
-    const QUrl linkUrl(anchorAt(event->pos()));
-    // linkText not straight to get, anchorAt uses ExactHit test, but cursorAt FuzzyHit, so this might not match
+    // Compare KWebKitPart's WebView::contextMenuEvent & WebEnginePart's WebEngineView::contextMenuEvent
+    // for the patterns used to fill the menu.
+    // QTextBrowser at of Qt 5.15 provides less data though, so for now this is reduced variant.
 
-    if (!linkUrl.isValid()) {
-        hasSelection = this->hasSelection();
-    }
+    // trying to get linkText skipped, because not reliable to get:
+    // anchorAt uses ExactHit test, but cursorAt FuzzyHit, so this might not match
+
+    const QUrl linkUrl(anchorAt(event->pos()));
+
+    // only report any selection if this is not a context menu for a link
+    const bool hasSelection = !linkUrl.isValid() && this->hasSelection();
 
     Q_EMIT contextMenuRequested(event->globalPos(),
                                 linkUrl,

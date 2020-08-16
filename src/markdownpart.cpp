@@ -271,7 +271,7 @@ void MarkdownPart::showHoveredLink(const QUrl& linkUrl)
 
         message = cleanedLinkUrl.toString();
 
-        if (QString::compare(scheme, QLatin1String("mailto"), Qt::CaseInsensitive) == 0) {
+        if (cleanedLinkUrl.scheme() != QLatin1String("mailto")) {
             fileItem = KFileItem(cleanedLinkUrl, QString(), KFileItem::Unknown);
         }
     }

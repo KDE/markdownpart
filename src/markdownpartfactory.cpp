@@ -18,10 +18,14 @@ MarkdownPartFactory::MarkdownPartFactory()
                   i18n("MarkdownPart"),
                   QStringLiteral(MARKDOWNPART_VERSION),
                   i18n("For the rendered display of Markdown files in a webpage-like layout"),
-                  KAboutLicense::LGPL_V2_1
+                  KAboutLicense::LGPL_V2_1,
+                  i18n("Copyright 2020 Friedrich W. H. Kossebau"),
+                  QString(),
+                  QStringLiteral("https://commits.kde.org/markdownpart")
                  )
 {
-    m_aboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org"));
+    m_aboutData.addAuthor(i18nc("@info:credit", "Friedrich W. H. Kossebau"),
+                          i18nc("@info:credit", "Author"), QStringLiteral("kossebau@kde.org"));
 }
 
 MarkdownPartFactory::~MarkdownPartFactory() = default;

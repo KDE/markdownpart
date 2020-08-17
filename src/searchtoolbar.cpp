@@ -38,7 +38,7 @@ SearchToolBar::~SearchToolBar() = default;
 
 void SearchToolBar::searchNext()
 {
-    const auto text = m_ui->searchTextEdit->text();
+    const QString text = m_ui->searchTextEdit->text();
     if (text.isEmpty()) {
         startSearch();
         return;
@@ -55,7 +55,7 @@ void SearchToolBar::searchNext()
 
 void SearchToolBar::searchPrevious()
 {
-    const auto text = m_ui->searchTextEdit->text();
+    const QString text = m_ui->searchTextEdit->text();
     if (text.isEmpty()) {
         startSearch();
         return;

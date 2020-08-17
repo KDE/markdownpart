@@ -70,7 +70,7 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
 
             QList<QAction*> selectActions;
 
-            auto action = m_part->copySelectionAction();
+            QAction* action = m_part->copySelectionAction();
             selectActions.append(action);
 
             mapAction.insert(QStringLiteral("editactions"), selectActions);
@@ -86,7 +86,7 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
             const QString fileName = linkUrl.fileName();
 
             if (!fileName.isEmpty() && !linkUrl.hasFragment() && !linkUrl.hasQuery()) {
-                auto mime = mimeDb.mimeTypeForFile(fileName);
+                QMimeType mime = mimeDb.mimeTypeForFile(fileName);
                 if (!mime.isDefault()) {
                     mimeType = mime.name();
                 }
@@ -96,16 +96,16 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
         QList<QAction*> linkActions;
 
         if (hasSelection) {
-            auto action = m_part->copySelectionAction();
+            QAction* action = m_part->copySelectionAction();
             linkActions.append(action);
         }
 
         if (linkUrl.scheme() == QLatin1String("mailto")) {
-            auto action = m_part->createCopyEmailAddressAction(m_contextMenuActionCollection, linkUrl);
+            QAction* action = m_part->createCopyEmailAddressAction(m_contextMenuActionCollection, linkUrl);
             m_contextMenuActionCollection->addAction(QStringLiteral("copylinklocation"), action);
             linkActions.append(action);
         } else {
-            auto action = m_part->createCopyLinkUrlAction(m_contextMenuActionCollection, linkUrl);
+            QAction* action = m_part->createCopyLinkUrlAction(m_contextMenuActionCollection, linkUrl);
             m_contextMenuActionCollection->addAction(QStringLiteral("copylinkurl"), action);
             linkActions.append(action);
         }

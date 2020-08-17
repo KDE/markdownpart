@@ -267,8 +267,6 @@ void MarkdownPart::showHoveredLink(const QUrl& linkUrl)
         QUrl cleanedLinkUrl(linkUrl);
         cleanedLinkUrl.setUserName(QString());
 
-        const QString scheme = cleanedLinkUrl.scheme();
-
         message = cleanedLinkUrl.toString();
 
         if (cleanedLinkUrl.scheme() != QLatin1String("mailto")) {

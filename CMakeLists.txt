@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(markdownpart VERSION 0.1.0)
 
-set(QT_MIN_VERSION "5.15.0")
-set(KF_MIN_VERSION "5.70.0")
+set(QT_MIN_VERSION "5.14.0")
+set(KF_MIN_VERSION "5.66.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})

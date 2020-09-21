@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(markdownpart VERSION 0.1.0)
+project(markdownpart VERSION 0.1.1)
 
 set(QT_MIN_VERSION "5.14.0")
 set(KF_MIN_VERSION "5.66.0")

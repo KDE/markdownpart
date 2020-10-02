@@ -111,4 +111,5 @@
     </release>
     <release version="0.1.0" date="2020-08-15"/>
   </releases>
+  <icon type="stock">text-markdown</icon>
 </component>

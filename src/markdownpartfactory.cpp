@@ -8,12 +8,20 @@
 
 // part
 #include "markdownpart.hpp"
+#if KPARTS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 #include "markdownpartconfig.hpp"
+#endif
 // KF
 #include <KLocalizedString>
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+#include <KPluginMetaData>
+#endif
 
 
 MarkdownPartFactory::MarkdownPartFactory()
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+{
+#else
     : m_aboutData(QStringLiteral("markdownpart"),
                   i18n("MarkdownPart"),
                   QStringLiteral(MARKDOWNPART_VERSION),
@@ -26,6 +34,7 @@ MarkdownPartFactory::MarkdownPartFactory()
 {
     m_aboutData.addAuthor(i18nc("@info:credit", "Friedrich W. H. Kossebau"),
                           i18nc("@info:credit", "Author"), QStringLiteral("kossebau@kde.org"));
+#endif
 }
 
 MarkdownPartFactory::~MarkdownPartFactory() = default;
@@ -42,6 +51,9 @@ QObject* MarkdownPartFactory::create(const char* iface,
         wantBrowserView ? MarkdownPart::BrowserViewModus :
         /* else */        MarkdownPart::ReadOnlyModus;
 
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    return new MarkdownPart(parentWidget, parent, metaData(), modus);
+#else
     return new MarkdownPart(parentWidget, parent, m_aboutData, modus);
+#endif
 }
-

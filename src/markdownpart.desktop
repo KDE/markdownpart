@@ -23,7 +23,16 @@ Name[sl]=Markdown View
 Name[sv]=Visning av Markdown
 Name[uk]=Перегляд Markdown
 Name[x-test]=xxMarkdown Viewxx
+Comment=For the rendered display of Markdown files in a webpage-like layout
 Icon=text-markdown
 MimeType=text/markdown;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
 X-KDE-Library=kf5/parts/markdownpart
+
+X-KDE-PluginInfo-Name=markdownpart
+X-KDE-PluginInfo-Version=@markdownpart_VERSION@
+X-KDE-PluginInfo-License=LGPL 2.1+
+X-KDE-PluginInfo-Copyright=Copyright 2020 Friedrich W. H. Kossebau
+X-KDE-PluginInfo-Author=Friedrich W. H. Kossebau
+X-KDE-PluginInfo-Email=kossebau@kde.org
+X-KDE-PluginInfo-Website=https://commits.kde.org/markdownpart

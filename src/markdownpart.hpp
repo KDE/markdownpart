@@ -8,6 +8,7 @@
 #define MARKDOWNPART_HPP
 
 // KF
+#include <kparts_version.h>
 #include <KParts/ReadOnlyPart>
 // Qt
 #include <QByteArray>
@@ -16,7 +17,11 @@
 class MarkdownBrowserExtension;
 class MarkdownView;
 class SearchToolBar;
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+class KPluginMetaData;
+#else
 class KAboutData;
+#endif
 class QTextDocument;
 
 
@@ -33,8 +38,11 @@ public:
     /**
      * Default constructor, with arguments as expected by MarkdownPartFactory
      */
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    MarkdownPart(QWidget* parentWidget, QObject* parent, const KPluginMetaData& metaData, Modus modus);
+#else
     MarkdownPart(QWidget* parentWidget, QObject* parent, const KAboutData& aboutData, Modus modus);
-
+#endif
     ~MarkdownPart() override;
 
 public:

@@ -11,7 +11,11 @@
 #include "markdownbrowserextension.hpp"
 #include "searchtoolbar.hpp"
 // KF
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+#include <KPluginMetaData>
+#else
 #include <KAboutData>
+#endif
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KLocalizedString>
@@ -32,7 +36,11 @@
 #include <QVBoxLayout>
 
 
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPluginMetaData& metaData, Modus modus)
+#else
 MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KAboutData& aboutData, Modus modus)
+#endif
     : KParts::ReadOnlyPart(parent)
     , m_sourceDocument(new QTextDocument(this))
     , m_widget(new MarkdownView(m_sourceDocument, parentWidget))
@@ -41,7 +49,11 @@ MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KAboutD
 {
     // set component data
     // the first arg must be the same as the subdirectory into which the part's rc file is installed
+#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    setMetaData(metaData);
+#else
     setComponentData(aboutData);
+#endif
 
     // set internal UI
     auto* mainLayout = new QVBoxLayout;

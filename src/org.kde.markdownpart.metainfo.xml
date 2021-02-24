@@ -101,22 +101,9 @@
   </categories>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="0.1.20123" date="2021-03-04"/>
     <release version="0.1.20122" date="2021-02-04"/>
     <release version="0.1.20121" date="2021-01-07"/>
     <release version="0.1.20120" date="2020-12-10"/>
-    <release version="0.1.1" date="2020-09-21">
-      <description>
-        <ul>
-          <li>Translation updates</li>
-        </ul>
-      </description>
-      <artifacts>
-        <artifact type="source">
-          <location>https://download.kde.org/stable/markdownpart/0.1.1/src/markdownpart-0.1.1.tar.xz</location>
-          <checksum type="sha256">d1dd6084a8a4e936618817490a4a0e99060865b8a5eebd85d69d42036f1c658b</checksum>
-          <size type="download">25200</size>
-        </artifact>
-      </artifacts>
-    </release>
   </releases>
 </component>

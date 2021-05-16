@@ -1,8 +1,5 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"markdownpart\")
 
-if(${KF5_VERSION} VERSION_LESS 5.77.0)
-    configure_file(markdownpartconfig.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/markdownpartconfig.hpp)
-endif()
 configure_file(markdownpart.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/markdownpart.desktop @ONLY)
 
 set(markdownpart_SRCS

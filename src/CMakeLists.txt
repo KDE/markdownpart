@@ -21,7 +21,7 @@ kcoreaddons_desktop_to_json(markdownpart ${CMAKE_CURRENT_BINARY_DIR}/markdownpar
 target_link_libraries(markdownpart
     KF5::I18n
     KF5::Parts
-    Qt5::Widgets
+    Qt::Widgets
 )
 
 install(TARGETS markdownpart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)

@@ -19,6 +19,6 @@ Please report bugs and feature requests in the [KDE issue tracker](https://bugs.
 
 ## Contact
 
-Feedback welcome, email kossebau AT kde org or catch me on freenode irc in #kdevelop.
+Feedback welcome, email kossebau AT kde org or catch me on Libera.Chat IRC in #kdevelop.
 
 (*Note*: This file was happily edited with the support of this plugin.)

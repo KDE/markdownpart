@@ -16,9 +16,3 @@ Select the MIME type "text/markdown" and in the "Embedding" tab in the "Service 
 ## Issues
 
 Please report bugs and feature requests in the [KDE issue tracker](https://bugs.kde.org/enter_bug.cgi?product=markdownpart).
-
-## Contact
-
-Feedback welcome, email kossebau AT kde org or catch me on freenode irc in #kdevelop.
-
-(*Note*: This file was happily edited with the support of this plugin.)

@@ -22,6 +22,7 @@
   <name xml:lang="en-GB">Markdown Viewer KPart</name>
   <name xml:lang="es">KPart del visor Markdown</name>
   <name xml:lang="et">Markdowni näitaja komponent</name>
+  <name xml:lang="eu">Markdown erakusteko KPart</name>
   <name xml:lang="fi">Markdown-katselinosa</name>
   <name xml:lang="fr">Afficheur « KPart » de fichiers « Markdown »</name>
   <name xml:lang="hi">मार्कडाउन प्रदर्शक केपार्ट</name>
@@ -48,6 +49,7 @@
   <summary xml:lang="en-GB">Rendered display of Markdown files in KParts-using software</summary>
   <summary xml:lang="es">Visor de archivos Markdown para software que usa KParts</summary>
   <summary xml:lang="et">Markdowni renderdatud näitamine KPartsi kasutavas tarkvaras</summary>
+  <summary xml:lang="eu">Markdown fitxategien errendatutako erakustaldia KParts erabiltzen duten softwareetan</summary>
   <summary xml:lang="fi">Markdown-tiedostojen hahmonnettu näkymä KPartsia käyttäviin ohjelmiin</summary>
   <summary xml:lang="fr">Affichage de rendu des fichiers « Markdown » avec un logiciel utilisant « KParts »</summary>
   <summary xml:lang="hi">केपार्ट्स उपयोगी अनुप्रयोग में मार्कडाउन फ़ाइलों का रेंडर्ड प्रदर्शन करता है</summary>
@@ -74,6 +76,7 @@
     <p xml:lang="en-GB">The Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.</p>
     <p xml:lang="es">El KPart visor de Markdown permite al software que usa KParts mostrar archivos en formato Markdown en una vista.</p>
     <p xml:lang="et">Markdowni näitaja komponent võimaldab KPartsi kasutaval tarkvaral näidata Markdowni vormingus faile renderdatud vaates.</p>
+    <p xml:lang="eu">Markdown erakusteko KPart-ek, KParts erabiltzen duten softwareei Markdown formatua duten fitxategien ikuspegi errendatua erakusten uzten die.</p>
     <p xml:lang="fi">Markdown-katselinosa mahdollistaa KPartsia käyttävien ohjelmien näyttää Markdown-tiedostot hahmonnettuna.</p>
     <p xml:lang="fr">L'afficheur « KPart » de fichiers « Markdown » permet à un logiciel utilisant « KParts » d'afficher les fichiers dans le format « Markdown » dans un affichage de rendu.</p>
     <p xml:lang="hi">मार्कडाउन प्रदर्शक केपार्ट, केपार्ट्स उपयोगी अनुप्रयोग में मार्कडाउन फ़ाइलों का रेंडर्ड प्रदर्शन करने की अनुमति देता है।</p>

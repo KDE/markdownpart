@@ -45,6 +45,8 @@ public:
 
     void copySelection();
 
+    QUrl resolvedUrl(const QUrl &url) const;
+
 protected: // KParts::ReadOnlyPart API
     bool openFile() override;
 

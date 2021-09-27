@@ -15,7 +15,6 @@
 // Qt
 #include <QMimeDatabase>
 
-
 MarkdownBrowserExtension::MarkdownBrowserExtension(MarkdownPart* part)
     : KParts::BrowserExtension(part)
     , m_part(part)
@@ -36,12 +35,12 @@ void MarkdownBrowserExtension::updateCopyAction(bool enabled)
 
 void MarkdownBrowserExtension::requestOpenUrl(const QUrl& url)
 {
-    Q_EMIT openUrlRequest(url);
+    Q_EMIT openUrlRequest(m_part->resolvedUrl(url));
 }
 
 void MarkdownBrowserExtension::requestOpenUrlNewWindow(const QUrl& url)
 {
-    Q_EMIT createNewWindow(url);
+    Q_EMIT createNewWindow(m_part->resolvedUrl(url));
 }
 
 void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
@@ -77,15 +76,15 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
         }
     } else {
         flags |= IsLink;
-        emitUrl = linkUrl;
+        emitUrl = m_part->resolvedUrl(linkUrl);
 
         QMimeDatabase mimeDb;
-        if (linkUrl.isLocalFile())
-            mimeType = mimeDb.mimeTypeForUrl(linkUrl).name();
+        if (emitUrl.isLocalFile())
+            mimeType = mimeDb.mimeTypeForUrl(emitUrl).name();
         else {
-            const QString fileName = linkUrl.fileName();
+            const QString fileName = emitUrl.fileName();
 
-            if (!fileName.isEmpty() && !linkUrl.hasFragment() && !linkUrl.hasQuery()) {
+            if (!fileName.isEmpty() && !emitUrl.hasFragment() && !emitUrl.hasQuery()) {
                 QMimeType mime = mimeDb.mimeTypeForFile(fileName);
                 if (!mime.isDefault()) {
                     mimeType = mime.name();
@@ -100,12 +99,12 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
             linkActions.append(action);
         }
 
-        if (linkUrl.scheme() == QLatin1String("mailto")) {
-            QAction* action = m_part->createCopyEmailAddressAction(m_contextMenuActionCollection, linkUrl);
+        if (emitUrl.scheme() == QLatin1String("mailto")) {
+            QAction* action = m_part->createCopyEmailAddressAction(m_contextMenuActionCollection, emitUrl);
             m_contextMenuActionCollection->addAction(QStringLiteral("copylinklocation"), action);
             linkActions.append(action);
         } else {
-            QAction* action = m_part->createCopyLinkUrlAction(m_contextMenuActionCollection, linkUrl);
+            QAction* action = m_part->createCopyLinkUrlAction(m_contextMenuActionCollection, emitUrl);
             m_contextMenuActionCollection->addAction(QStringLiteral("copylinkurl"), action);
             linkActions.append(action);
         }
@@ -113,15 +112,16 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
         mapAction.insert(QStringLiteral("linkactions"), linkActions);
     }
 
-    if (!mapAction.isEmpty()) {
-        KParts::OpenUrlArguments args;
-        args.setMimeType(mimeType);
+    // Always emit the popupMenu() signal even if there are no part-specific
+    // actions, so that the remainder of the calling application's popup menu
+    // (in Konqueror "Bookmark this Location", etc...) still appears.
+    KParts::OpenUrlArguments args;
+    args.setMimeType(mimeType);
 
-        KParts::BrowserArguments bargs;
-        bargs.setForcesNewWindow(false);
+    KParts::BrowserArguments bargs;
+    bargs.setForcesNewWindow(false);
 
-        Q_EMIT popupMenu(globalPos, emitUrl, static_cast<mode_t>(-1), args, bargs, flags, mapAction);
-    }
+    Q_EMIT popupMenu(globalPos, emitUrl, static_cast<mode_t>(-1), args, bargs, flags, mapAction);
 }
 
 int MarkdownBrowserExtension::xOffset()

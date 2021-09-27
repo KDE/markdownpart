@@ -128,6 +128,8 @@ bool MarkdownPart::openFile()
     file.close();
 
     m_sourceDocument->setMarkdown(text);
+    const QUrl b = QUrl::fromLocalFile(localFilePath()).adjusted(QUrl::RemoveFilename);
+    m_sourceDocument->setBaseUrl(b);
 
     restoreScrollPosition();
 
@@ -171,6 +173,7 @@ bool MarkdownPart::doCloseStream()
     QString text = stream.readAll();
 
     m_sourceDocument->setMarkdown(text);
+    m_sourceDocument->setBaseUrl(QUrl());
 
     restoreScrollPosition();
 
@@ -192,6 +195,7 @@ bool MarkdownPart::closeUrl()
     }
 
     m_sourceDocument->setMarkdown(QString());
+    m_sourceDocument->setBaseUrl(QUrl());
     m_searchAction->setEnabled(false);
     m_searchNextAction->setEnabled(false);
     m_searchPreviousAction->setEnabled(false);
@@ -255,21 +259,20 @@ void MarkdownPart::handleContextMenuRequest(QPoint globalPos,
     }
 }
 
-void MarkdownPart::showHoveredLink(const QUrl& linkUrl)
+void MarkdownPart::showHoveredLink(const QUrl& _linkUrl)
 {
+    QUrl linkUrl = resolvedUrl(_linkUrl);
     QString message;
     KFileItem fileItem;
 
     if (linkUrl.isValid()) {
 
         // Protect the user against URL spoofing!
-        QUrl cleanedLinkUrl(linkUrl);
-        cleanedLinkUrl.setUserName(QString());
+        linkUrl.setUserName(QString());
+        message = linkUrl.toDisplayString();
 
-        message = cleanedLinkUrl.toString();
-
-        if (cleanedLinkUrl.scheme() != QLatin1String("mailto")) {
-            fileItem = KFileItem(cleanedLinkUrl, QString(), KFileItem::Unknown);
+        if (linkUrl.scheme() != QLatin1String("mailto")) {
+            fileItem = KFileItem(linkUrl, QString(), KFileItem::Unknown);
         }
     }
 
@@ -316,4 +319,15 @@ void MarkdownPart::copySelection()
 void MarkdownPart::selectAll()
 {
     m_widget->selectAll();
+}
+
+QUrl MarkdownPart::resolvedUrl(const QUrl &url) const
+{
+    QUrl u = url;
+    if (u.isRelative()) {
+        const QUrl baseUrl = m_sourceDocument->baseUrl();
+        u = baseUrl.resolved(u);
+    }
+
+    return (u.adjusted(QUrl::NormalizePathSegments));
 }

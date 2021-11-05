@@ -10,6 +10,11 @@ target_sources(markdownpart PRIVATE
     markdownpartfactory.cpp
     markdownpart.cpp
     markdownbrowserextension.cpp
+    markdownview.hpp
+    markdownbrowserextension.hpp
+    markdownpart.hpp
+    searchtoolbar.hpp
+    markdownpartfactory.hpp
 
     markdownpart.qrc
 )

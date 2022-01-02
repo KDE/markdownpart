@@ -9,7 +9,6 @@
 
 // KF
 #include <KPluginFactory>
-#include <kparts_version.h>
 
 
 class MarkdownPartFactory : public KPluginFactory

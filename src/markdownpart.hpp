@@ -8,7 +8,6 @@
 #define MARKDOWNPART_HPP
 
 // KF
-#include <kparts_version.h>
 #include <KParts/ReadOnlyPart>
 // Qt
 #include <QByteArray>

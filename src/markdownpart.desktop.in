@@ -55,7 +55,7 @@ Comment[zh_CN]=用于在一个类似网页的布局中显示渲染后的 Markdow
 Icon=text-markdown
 MimeType=text/markdown;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View
-X-KDE-Library=kf5/parts/markdownpart
+X-KDE-Library=kf@QT_MAJOR_VERSION@/parts/markdownpart
 
 X-KDE-PluginInfo-Name=markdownpart
 X-KDE-PluginInfo-Version=@markdownpart_VERSION@

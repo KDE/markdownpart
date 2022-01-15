@@ -29,7 +29,7 @@ target_link_libraries(markdownpart
     Qt${QT_MAJOR_VERSION}::Widgets
 )
 
-install(TARGETS markdownpart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)
+install(TARGETS markdownpart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf${QT_MAJOR_VERSION}/parts)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/markdownpart.desktop  DESTINATION ${KDE_INSTALL_KSERVICESDIR})
 
 install(

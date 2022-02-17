@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Markdown View
+Name[ar]=عرض مارك‌داون
 Name[ca]=Vista del Markdown
 Name[ca@valencia]=Vista del Markdown
 Name[cs]=Pohled na Markdown
@@ -28,6 +29,7 @@ Name[uk]=Перегляд Markdown
 Name[x-test]=xxMarkdown Viewxx
 Name[zh_CN]=Markdown 视图
 Comment=For the rendered display of Markdown files in a webpage-like layout
+Comment[ar]=يعرض ملفات مارك‌داون في تخطيط يشبه صفحة الويب
 Comment[ca]=Per a la visualització renderitzada de fitxers Markdown en una disposició semblant a una pàgina web
 Comment[ca@valencia]=Per a la visualització renderitzada de fitxers Markdown en una disposició semblant a una pàgina web
 Comment[de]=Für die gerenderte Anzeige von Markdown-Dateien wie auf einer Webseite

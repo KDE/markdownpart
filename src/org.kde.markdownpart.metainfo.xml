@@ -14,6 +14,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.1+</project_license>
   <name>Markdown Viewer KPart</name>
+  <name xml:lang="ar">جزء عارض مارك‌داون</name>
   <name xml:lang="ca">KPart del visor de Markdown</name>
   <name xml:lang="ca-valencia">KPart del visor de Markdown</name>
   <name xml:lang="cs">KPart pro prohlížení souborů Markdown</name>
@@ -41,6 +42,7 @@
   <name xml:lang="x-test">xxMarkdown Viewer KPartxx</name>
   <name xml:lang="zh-CN">Markdown 查看器 KPart</name>
   <summary>Rendered display of Markdown files in KParts-using software</summary>
+  <summary xml:lang="ar">تعرض ملفات مارك‌داون في التطبيقات التي تستخدم جزء ك</summary>
   <summary xml:lang="ca">Mostra renderitzats els fitxers Markdown en el programari que utilitza les KParts</summary>
   <summary xml:lang="ca-valencia">Mostra renderitzats els fitxers Markdown en el programari que utilitza les KParts</summary>
   <summary xml:lang="cs">Zpracované zobrazení Markdown v aplikacích využívajících KParts</summary>
@@ -69,6 +71,7 @@
   <summary xml:lang="zh-CN">在使用 KParts 的软件中显示已渲染的 Markdown 文件</summary>
   <description>
     <p>The Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.</p>
+    <p xml:lang="ar">يمكن عارض مارك‌داون التطبيقات التي تستخدم جزء ك من تصيير وعرض ملفات مارك‌داون.</p>
     <p xml:lang="ca">La KPart del visor de Markdown permet que el programari que utilitza les KParts, mostri els fitxers en format de Markdown en una vista renderitzada.</p>
     <p xml:lang="ca-valencia">La KPart del visor de Markdown permet que el programari que utilitza les KParts, mostre els fitxers en format de Markdown en una vista renderitzada.</p>
     <p xml:lang="de">Die Markdown-Betrachter-Komponente befähigt Software, die KParts verwendet, zur Anzeige von Dateien im Markdown-Format.</p>

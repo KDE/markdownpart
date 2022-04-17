@@ -38,6 +38,7 @@
   <name xml:lang="sk">KPark prehliadač Markdown</name>
   <name xml:lang="sl">Markdown Viewer KPart</name>
   <name xml:lang="sv">Markdown KPart-visning</name>
+  <name xml:lang="tr">Markdown Görüntüleyici KPart</name>
   <name xml:lang="uk">Модуль перегляду даних markdown</name>
   <name xml:lang="x-test">xxMarkdown Viewer KPartxx</name>
   <name xml:lang="zh-CN">Markdown 查看器 KPart</name>
@@ -66,6 +67,7 @@
   <summary xml:lang="sk">Renderované zobrazenie súborov Markdown v softvéri používajúcom KParts</summary>
   <summary xml:lang="sl">Prikaže prikaz datotek Markdown v programski opremi, ki uporablja KParts</summary>
   <summary xml:lang="sv">Återgiven vy för Markdown-filer i programvara som använder KParts</summary>
+  <summary xml:lang="tr">Markdown dosyalarını KPart'lar kullanan yazılımlarda görüntüler</summary>
   <summary xml:lang="uk">Показ обробленого вмісту файлів markdown у програмному забезпеченні із підтримкою KParts</summary>
   <summary xml:lang="x-test">xxRendered display of Markdown files in KParts-using softwarexx</summary>
   <summary xml:lang="zh-CN">在使用 KParts 的软件中显示已渲染的 Markdown 文件</summary>
@@ -94,6 +96,7 @@
     <p xml:lang="sk">KPark prehliadača Markdown umožňuje softvéru používajúcemu KParts zobraziť súbory vo formáte Markdown v renderovanom pohľade.</p>
     <p xml:lang="sl">Pregledovalnik Markdown KPart omogoča programski opremi, ki uporablja KParts, za prikazovanje datotek v upodobljenem pogledu.</p>
     <p xml:lang="sv">Markdown KPart-visning tillåter program som använder KParts att visa filer med Markdown-format i en återgiven vy.</p>
+    <p xml:lang="tr">Markdown Görüntüleyici KPart, KPart'lar kullanan yazılımlarda son hali dokunmuş Markdown görüntülemesine izin verir.</p>
     <p xml:lang="uk">Модуль перегляду даних markdown надає змогу переглядати оброблений вміст файлів у форматі markdown у будь-якому програмному забезпеченні із підтримкою KParts.</p>
     <p xml:lang="x-test">xxThe Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.xx</p>
     <p xml:lang="zh-CN">Markdown 查看器 KPart 让使用 KParts 的软件能够在一个视图中显示已渲染的 Markdown 文件。</p>

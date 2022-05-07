@@ -123,7 +123,9 @@ bool MarkdownPart::openFile()
     prepareViewStateRestoringOnReload();
 
     QTextStream stream(&file);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     stream.setCodec("UTF-8");
+#endif
     QString text = stream.readAll();
 
     file.close();
@@ -171,7 +173,9 @@ bool MarkdownPart::doCloseStream()
     prepareViewStateRestoringOnReload();
 
     QTextStream stream(&buffer);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     stream.setCodec("UTF-8");
+#endif
     QString text = stream.readAll();
 
     m_sourceDocument->setMarkdown(text);

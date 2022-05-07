@@ -123,6 +123,7 @@ bool MarkdownPart::openFile()
     prepareViewStateRestoringOnReload();
 
     QTextStream stream(&file);
+    stream.setCodec("UTF-8");
     QString text = stream.readAll();
 
     file.close();
@@ -170,6 +171,7 @@ bool MarkdownPart::doCloseStream()
     prepareViewStateRestoringOnReload();
 
     QTextStream stream(&buffer);
+    stream.setCodec("UTF-8");
     QString text = stream.readAll();
 
     m_sourceDocument->setMarkdown(text);

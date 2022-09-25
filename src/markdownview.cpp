@@ -8,7 +8,6 @@
 
 // Qt
 #include <QScrollBar>
-#include <QTextCursor>
 #include <QContextMenuEvent>
 
 

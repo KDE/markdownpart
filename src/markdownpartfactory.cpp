@@ -10,7 +10,6 @@
 #include "markdownpart.hpp"
 // KF
 #include <KLocalizedString>
-#include <KPluginMetaData>
 
 
 MarkdownPartFactory::MarkdownPartFactory() = default;

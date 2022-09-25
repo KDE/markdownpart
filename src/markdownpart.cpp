@@ -15,7 +15,6 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KLocalizedString>
-#include <KStringHandler>
 #include <KFileItem>
 // Qt
 #include <QTextDocument>

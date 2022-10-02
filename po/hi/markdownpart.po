@@ -1,0 +1,102 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+#
+# Sameer Singh <lumarzeli30@gmail.com>, 2021.
+# Raghavendra Kamath <raghu@raghukamath.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:50+0000\n"
+"PO-Revision-Date: 2021-06-29 16:31+0530\n"
+"Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
+"Language-Team: kde-hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 21.04.2\n"
+
+#: markdownpart.cpp:88
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "पाठ की नक़ल बनाएं (&C)"
+
+#: markdownpart.cpp:249
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "कड़ी खोलें"
+
+#: markdownpart.cpp:296
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "ई-मेल पते की नक़ल करें (&C)"
+
+#: markdownpart.cpp:309
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "कड़ी यूआरएल की नक़ल बनाएँ (&U)"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "संपादन (&E)"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "ढूंढें :"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "अगले मेल पर जाएँ"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "पिछले मेल पर जाएँ"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "केस संवेदनशील मिलाएँ"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "समीर सिंह, राघवेंद्र कामत"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "lumarzeli30@gmail.com, raghu@raghukamath.com"
+
+#~ msgid "MarkdownPart"
+#~ msgstr "मार्कडाउन पार्ट"
+
+#~ msgid "For the rendered display of Markdown files in a webpage-like layout"
+#~ msgstr "वेबपृष्ठ जैसे अभिन्यास में मार्कडाउन फाइलों के रेंडर्ड प्रदर्शन के लिए"
+
+#~ msgid "Copyright 2020 Friedrich W. H. Kossebau"
+#~ msgstr "सर्वाधिकार सुरक्षित २०२० फ़्राइड्रिच डब्लु. एच. कॉसेबाउ"
+
+#~ msgctxt "@info:credit"
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "फ़्राइड्रिच डब्लु. एच. कॉसेबाउ"
+
+#~ msgctxt "@info:credit"
+#~ msgid "Author"
+#~ msgstr "लेखक"

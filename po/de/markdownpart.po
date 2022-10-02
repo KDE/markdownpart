@@ -1,0 +1,101 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+#
+# Friedrich W. H. Kossebau <kossebau@kde.org>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:50+0000\n"
+"PO-Revision-Date: 2020-09-05 16:21+0200\n"
+"Last-Translator: Friedrich W. H. Kossebau <kossebau@kde.org>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: markdownpart.cpp:88
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "&Text kopieren"
+
+#: markdownpart.cpp:249
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "Verknüpfungsadresse öffnen"
+
+#: markdownpart.cpp:296
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "&E-Mail-Adresse kopieren"
+
+#: markdownpart.cpp:309
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "&Verknüpfungsadresse kopieren"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "&Bearbeiten"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "Suchen:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "Zur nächsten Übereinstimmung springen"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "Zur vorherigen Übereinstimmung springen"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "Groß-/Kleinschreibung beachten"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Markus Slopianka, Friedrich W. H. Kossebau"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "markus.s@kdemail.net, kossebau@kde.org"
+
+#~ msgid "MarkdownPart"
+#~ msgstr "MarkdownPart"
+
+#~ msgid "For the rendered display of Markdown files in a webpage-like layout"
+#~ msgstr ""
+#~ "Für die gerenderte Anzeige von Markdown-Dateien wie auf einer Webseite"
+
+#~ msgid "Copyright 2020 Friedrich W. H. Kossebau"
+#~ msgstr "Copyright 2020 Friedrich W. H. Kossebau"
+
+#~ msgctxt "@info:credit"
+#~ msgid "Friedrich W. H. Kossebau"
+#~ msgstr "Friedrich W. H. Kossebau"
+
+#~ msgctxt "@info:credit"
+#~ msgid "Author"
+#~ msgstr "Autor"

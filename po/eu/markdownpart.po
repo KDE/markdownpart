@@ -1,0 +1,79 @@
+# Translation for markdownpart.po to Euskara/Basque (eu).
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+#
+# Translator:
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:50+0000\n"
+"PO-Revision-Date: 2021-08-24 15:49+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.08.0\n"
+
+#: markdownpart.cpp:88
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "&Kopiatu testua"
+
+#: markdownpart.cpp:249
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "Ireki esteka"
+
+#: markdownpart.cpp:296
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "&Kopiatu e-posta helbidea"
+
+#: markdownpart.cpp:309
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "Kopiatu estekaren &URL"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "&Editatu"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "Bilatu:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "Egin jauzi hurrengo bat-etortzera"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "Egin jauzi aurreko bat-etortzera"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "Bereizi maiuskulak/minuskulak"

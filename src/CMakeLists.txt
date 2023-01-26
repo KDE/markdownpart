@@ -24,8 +24,8 @@ ki18n_wrap_ui(markdownpart searchtoolbar.ui)
 kcoreaddons_desktop_to_json(markdownpart ${CMAKE_CURRENT_BINARY_DIR}/markdownpart.desktop)
 
 target_link_libraries(markdownpart
-    KF5::I18n
-    KF5::Parts
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::Parts
     Qt${QT_MAJOR_VERSION}::Widgets
 )
 

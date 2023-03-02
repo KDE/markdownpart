@@ -8,6 +8,7 @@
 #define MARKDOWNPARTFACTORY_HPP
 
 // KF
+#include <kcoreaddons_version.h>
 #include <KPluginFactory>
 
 
@@ -24,7 +25,11 @@ public:
 public:
     QObject* create(const char* iface,
                     QWidget* parentWidget, QObject* parent,
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 240, 0)
+                    const QVariantList& args) override;
+#else
                     const QVariantList& args, const QString& keyword) override;
+#endif
 };
 
 #endif

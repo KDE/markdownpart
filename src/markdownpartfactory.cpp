@@ -18,9 +18,14 @@ MarkdownPartFactory::~MarkdownPartFactory() = default;
 
 QObject* MarkdownPartFactory::create(const char* iface,
                                      QWidget* parentWidget, QObject* parent,
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 240, 0)
+                                     const QVariantList& args)
+{
+#else
                                      const QVariantList& args, const QString& keyword)
 {
     Q_UNUSED(keyword );
+#endif
 
     const bool wantBrowserView = (args.contains(QStringLiteral("Browser/View")) ||
                                  (strcmp(iface, "Browser/View") == 0));

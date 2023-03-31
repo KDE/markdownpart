@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-26 00:50+0000\n"
+"POT-Creation-Date: 2023-03-31 00:50+0000\n"
 "PO-Revision-Date: 2021-05-15 16:44+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -18,25 +18,25 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 19.12.3\n"
 
-#: markdownpart.cpp:88
+#: markdownpart.cpp:94
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
 msgstr "&Copiază textul"
 
-#: markdownpart.cpp:249
+#: markdownpart.cpp:255
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
 msgstr "Deschide legătura"
 
-#: markdownpart.cpp:296
+#: markdownpart.cpp:302
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
 msgstr "&Copiază adresa de e-mail"
 
-#: markdownpart.cpp:309
+#: markdownpart.cpp:315
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"

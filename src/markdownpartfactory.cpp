@@ -35,3 +35,5 @@ QObject* MarkdownPartFactory::create(const char* iface,
 
     return new MarkdownPart(parentWidget, parent, metaData(), modus);
 }
+
+#include "moc_markdownpartfactory.cpp"

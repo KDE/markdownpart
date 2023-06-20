@@ -68,3 +68,5 @@ void MarkdownView::contextMenuEvent(QContextMenuEvent* event)
 
     event->accept();
 }
+
+#include "moc_markdownview.cpp"

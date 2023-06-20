@@ -137,3 +137,5 @@ int MarkdownBrowserExtension::yOffset()
 {
     return m_part->view()->scrollPositionY();
 }
+
+#include "moc_markdownbrowserextension.cpp"

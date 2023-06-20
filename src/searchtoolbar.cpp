@@ -101,3 +101,5 @@ void SearchToolBar::hideEvent(QHideEvent* event)
 
     QWidget::hideEvent(event);
 }
+
+#include "moc_searchtoolbar.cpp"

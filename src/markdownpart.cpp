@@ -342,3 +342,5 @@ QUrl MarkdownPart::resolvedUrl(const QUrl &url) const
 
     return (u.adjusted(QUrl::NormalizePathSegments));
 }
+
+#include "moc_markdownpart.cpp"

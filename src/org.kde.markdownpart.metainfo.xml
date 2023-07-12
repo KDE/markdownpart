@@ -21,6 +21,7 @@
   <name xml:lang="de">Markdown-Betrachter-KPart</name>
   <name xml:lang="el">Markdown Viewer KPart</name>
   <name xml:lang="en-GB">Markdown Viewer KPart</name>
+  <name xml:lang="eo">Markdown-Vida KPart</name>
   <name xml:lang="es">KPart del visor Markdown</name>
   <name xml:lang="et">Markdowni näitaja komponent</name>
   <name xml:lang="eu">Markdown erakusteko KPart</name>
@@ -53,6 +54,7 @@
   <summary xml:lang="de">Anzeige von Markdown-Dateien in Software, die KParts verwendet</summary>
   <summary xml:lang="el">Αποτύπωση εμφάνισης markdown αρχείων σε λογισμικό με KParts</summary>
   <summary xml:lang="en-GB">Rendered display of Markdown files in KParts-using software</summary>
+  <summary xml:lang="eo">Bildigita elmontro de Markdown-dosieroj en programoj kiuj uzas KParts</summary>
   <summary xml:lang="es">Visor de archivos Markdown para software que usa KParts</summary>
   <summary xml:lang="et">Markdowni renderdatud näitamine KPartsi kasutavas tarkvaras</summary>
   <summary xml:lang="eu">Markdown fitxategien errendatutako erakustaldia KParts erabiltzen duten softwareetan</summary>
@@ -85,6 +87,7 @@
     <p xml:lang="de">Die Markdown-Betrachter-Komponente befähigt Software, die KParts verwendet, zur Anzeige von Dateien im Markdown-Format.</p>
     <p xml:lang="el">Το Markdown Viewer KPart επιτρέπει σε λογισμικό που χρησιμοποιεί KParts να εμφανίζει αρχεία σε τύπο markdown σε μια προβολή αποτύπωσης.</p>
     <p xml:lang="en-GB">The Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.</p>
+    <p xml:lang="eo">La Markdown-Vida KPart permesas al KParts-uzanta programaro montri dosierojn de Markdown-formato en bildigita vido.</p>
     <p xml:lang="es">El KPart visor de Markdown permite al software que usa KParts mostrar archivos en formato Markdown en una vista.</p>
     <p xml:lang="et">Markdowni näitaja komponent võimaldab KPartsi kasutaval tarkvaral näidata Markdowni vormingus faile renderdatud vaates.</p>
     <p xml:lang="eu">Markdown erakusteko KPart-ek, KParts erabiltzen duten softwareei Markdown formatua duten fitxategien ikuspegi errendatua erakusten uzten die.</p>

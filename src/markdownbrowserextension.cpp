@@ -118,10 +118,7 @@ void MarkdownBrowserExtension::requestContextMenu(QPoint globalPos,
     KParts::OpenUrlArguments args;
     args.setMimeType(mimeType);
 
-    KParts::BrowserArguments bargs;
-    bargs.setForcesNewWindow(false);
-
-    Q_EMIT popupMenu(globalPos, emitUrl, static_cast<mode_t>(-1), args, bargs, flags, mapAction);
+    Q_EMIT popupMenu(globalPos, emitUrl, static_cast<mode_t>(-1), args, KParts::BrowserArguments(), flags, mapAction);
 }
 
 int MarkdownBrowserExtension::xOffset()

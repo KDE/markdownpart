@@ -10,9 +10,19 @@
 #include "markdownpart.hpp"
 // KF
 #include <KLocalizedString>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <KXmlGui5ConfigMigration>
+#endif
 
 
-MarkdownPartFactory::MarkdownPartFactory() = default;
+MarkdownPartFactory::MarkdownPartFactory()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    // copy KF5-time user toolbar configuration, keep old copy for users of KF5 plugin version
+    KXmlGui5ConfigMigration::migrate(QStringLiteral("markdownpart"), {QStringLiteral("markdownpartui.rc")},
+                                     KXmlGui5ConfigMigration::NoMigrationOptions);
+#endif
+}
 
 MarkdownPartFactory::~MarkdownPartFactory() = default;
 

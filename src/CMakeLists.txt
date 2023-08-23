@@ -15,9 +15,13 @@ target_sources(markdownpart PRIVATE
     markdownpart.hpp
     searchtoolbar.hpp
     markdownpartfactory.hpp
-
-    markdownpart.qrc
 )
+if (QT_MAJOR_VERSION STREQUAL "6")
+    # after full switch to KF6, drop 6 suffix again
+    target_sources(markdownpart PRIVATE markdownpart6.qrc)
+else()
+    target_sources(markdownpart PRIVATE markdownpart.qrc)
+endif()
 
 ki18n_wrap_ui(markdownpart searchtoolbar.ui)
 

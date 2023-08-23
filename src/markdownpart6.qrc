@@ -1,0 +1,6 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/markdownpart/kxmlgui6">
+        <file>markdownpartui.rc</file>
+    </qresource>
+</RCC>

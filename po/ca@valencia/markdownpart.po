@@ -62,14 +62,14 @@ msgstr "Busca:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to next match"
-msgstr "Salta a la coincidència següent"
+msgstr "Salta fins a la coincidència següent"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
 #: searchtoolbar.ui:72
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to previous match"
-msgstr "Salta a la coincidència anterior"
+msgstr "Salta fins a la coincidència anterior"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
 #: searchtoolbar.ui:85

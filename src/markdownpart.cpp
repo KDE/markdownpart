@@ -32,21 +32,12 @@
 
 
 MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPluginMetaData& metaData, Modus modus)
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    : KParts::ReadOnlyPart(parent)
-#else
     : KParts::ReadOnlyPart(parent, metaData)
-#endif
     , m_sourceDocument(new QTextDocument(this))
     , m_widget(new MarkdownView(m_sourceDocument, parentWidget))
     , m_searchToolBar(new SearchToolBar(m_widget, parentWidget))
     , m_browserExtension(new MarkdownBrowserExtension(this))
 {
-    // set component data
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    setMetaData(metaData);
-#endif
-
     // set internal UI
     auto* mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -128,9 +119,6 @@ bool MarkdownPart::openFile()
     prepareViewStateRestoringOnReload();
 
     QTextStream stream(&file);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    stream.setCodec("UTF-8");
-#endif
     QString text = stream.readAll();
 
     file.close();
@@ -178,9 +166,6 @@ bool MarkdownPart::doCloseStream()
     prepareViewStateRestoringOnReload();
 
     QTextStream stream(&buffer);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    stream.setCodec("UTF-8");
-#endif
     QString text = stream.readAll();
 
     m_sourceDocument->setMarkdown(text);

@@ -13,21 +13,13 @@
 // KF
 #include <kparts_version.h>
 
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 240, 0)
 #include <KParts/NavigationExtension>
-#else
-#include <KParts/BrowserExtension>
-#endif
 
 class MarkdownPart;
 class KActionCollection;
 
 
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 240, 0)
 class MarkdownBrowserExtension : public KParts::NavigationExtension
-#else
-class MarkdownBrowserExtension : public KParts::BrowserExtension
-#endif
 {
     Q_OBJECT
 

@@ -16,11 +16,7 @@
 #include <QMimeDatabase>
 
 MarkdownBrowserExtension::MarkdownBrowserExtension(MarkdownPart* part)
-#if KPARTS_VERSION >= QT_VERSION_CHECK(5, 240, 0)
     : KParts::NavigationExtension(part)
-#else
-    : KParts::BrowserExtension(part)
-#endif
     , m_part(part)
     , m_contextMenuActionCollection(new KActionCollection(this))
 {

@@ -22,12 +22,12 @@ target_sources(markdownpart PRIVATE
 ki18n_wrap_ui(markdownpart searchtoolbar.ui)
 
 target_link_libraries(markdownpart
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::Parts
-    Qt${QT_MAJOR_VERSION}::Widgets
+    KF6::I18n
+    KF6::Parts
+    Qt6::Widgets
 )
 
-install(TARGETS markdownpart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf${QT_MAJOR_VERSION}/parts)
+install(TARGETS markdownpart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
 
 install(
     FILES org.kde.markdownpart.metainfo.xml

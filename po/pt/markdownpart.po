@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 00:50+0000\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
 "PO-Revision-Date: 2020-08-18 12:19+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -13,25 +13,25 @@ msgstr ""
 "X-POFile-SpellExtra: MarkdownPart Markdown Friedrich Kossebau\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: markdownpart.cpp:94
+#: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
 msgstr "&Copiar o Texto"
 
-#: markdownpart.cpp:255
+#: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
 msgstr "Abrir a Ligação"
 
-#: markdownpart.cpp:302
+#: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
 msgstr "&Copiar o Endereço de E-mail"
 
-#: markdownpart.cpp:315
+#: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"

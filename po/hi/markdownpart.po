@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 00:50+0000\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
 "PO-Revision-Date: 2021-06-29 16:31+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -18,25 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Lokalize 21.04.2\n"
 
-#: markdownpart.cpp:94
+#: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
 msgstr "पाठ की नक़ल बनाएं (&C)"
 
-#: markdownpart.cpp:255
+#: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
 msgstr "कड़ी खोलें"
 
-#: markdownpart.cpp:302
+#: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
 msgstr "ई-मेल पते की नक़ल करें (&C)"
 
-#: markdownpart.cpp:315
+#: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"

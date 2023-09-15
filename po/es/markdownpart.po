@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 00:50+0000\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
 "PO-Revision-Date: 2020-08-18 15:50+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19,25 +19,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.0\n"
 
-#: markdownpart.cpp:94
+#: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
 msgstr "&Copiar texto"
 
-#: markdownpart.cpp:255
+#: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
 msgstr "Abrir enlace"
 
-#: markdownpart.cpp:302
+#: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
 msgstr "&Copiar dirección de correo electrónico"
 
-#: markdownpart.cpp:315
+#: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 00:50+0000\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
 "PO-Revision-Date: 2020-08-30 20:38+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,25 +19,25 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: markdownpart.cpp:94
+#: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
 msgstr "&Kopier tekst"
 
-#: markdownpart.cpp:255
+#: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
 msgstr "Opna lenkje"
 
-#: markdownpart.cpp:302
+#: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
 msgstr "&Kopier e-postadresse"
 
-#: markdownpart.cpp:315
+#: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"

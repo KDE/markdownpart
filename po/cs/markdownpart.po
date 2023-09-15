@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-31 00:50+0000\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
 "PO-Revision-Date: 2020-09-01 16:49+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.08.0\n"
 
-#: markdownpart.cpp:94
+#: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
 msgstr "&Kopírovat text"
 
-#: markdownpart.cpp:255
+#: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
-#: markdownpart.cpp:302
+#: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
 msgstr "&Kopírovat e-mailovou adresu"
 
-#: markdownpart.cpp:315
+#: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"

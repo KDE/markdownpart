@@ -1,0 +1,76 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+#
+# giovanni <g.sora@tiscali.it>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
+"PO-Revision-Date: 2023-09-15 14:55+0200\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
+
+#: markdownpart.cpp:85
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "&Copia texto"
+
+#: markdownpart.cpp:240
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "Aperi Ligamine"
+
+#: markdownpart.cpp:287
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "&Copia adresse de e-posta"
+
+#: markdownpart.cpp:300
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "Copia &URL de ligamine"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "&Edita"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "Trova:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "Salta al proxime correspondentia"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "Salta al previe correspondentia"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr ""

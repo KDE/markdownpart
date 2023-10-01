@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
+"PO-Revision-Date: 2023-10-01 00:56+0530\n"
+"Last-Translator: \n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: markdownpart.cpp:85
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "&पाठ्यं प्रतिलिख्यताम्"
+
+#: markdownpart.cpp:240
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "पतां उद्घाटयन्तु"
+
+#: markdownpart.cpp:287
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "&ईमेल पता प्रतिलिपि कुर्वन्तु"
+
+#: markdownpart.cpp:300
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "प्रतिलिपि पता &URL"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "&सम्पादयतु"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "अन्वेषय:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "अग्रिम-मेलनम्‌ प्रति कूदन्तु"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "पूर्वमेलनं प्रति कूदन्तु"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "मेलः केस-सेन्सिटिव अस्ति"

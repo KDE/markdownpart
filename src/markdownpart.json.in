@@ -33,7 +33,8 @@
                 "Name[uk]": "Friedrich W. H. Kossebau",
                 "Name[vi]": "Friedrich W. H. Kossebau",
                 "Name[x-test]": "xxFriedrich W. H. Kossebauxx",
-                "Name[zh_CN]": "Friedrich W. H. Kossebau"
+                "Name[zh_CN]": "Friedrich W. H. Kossebau",
+                "Name[zh_TW]": "Friedrich W. H. Kossebau"
             }
         ],
         "Copyright": "Copyright 2020 Friedrich W. H. Kossebau",
@@ -66,6 +67,7 @@
         "Copyright[vi]": "Bản quyền 2020 Friedrich W. H. Kossebau",
         "Copyright[x-test]": "xxCopyright 2020 Friedrich W. H. Kossebauxx",
         "Copyright[zh_CN]": "Copyright 2020 Friedrich W. H. Kossebau",
+        "Copyright[zh_TW]": "版權所有 2020 Friedrich W. H. Kossebau",
         "Description": "For the rendered display of Markdown files in a webpage-like layout",
         "Description[ar]": "يعرض ملفات مارك‌داون في تخطيط يشبه صفحة الويب",
         "Description[ca@valencia]": "Per a la visualització renderitzada de fitxers en Markdown en una disposició pareixent a una pàgina web",
@@ -96,6 +98,7 @@
         "Description[vi]": "Hiển thị có kết xuất các tệp Markdown trong một bố cục giống trang web",
         "Description[x-test]": "xxFor the rendered display of Markdown files in a webpage-like layoutxx",
         "Description[zh_CN]": "用于在一个类似网页的布局中渲染并显示 Markdown 文件",
+        "Description[zh_TW]": "用於在一個像是網頁一樣的佈局中顯示 Markdown 檔案渲染後的結果",
         "Icon": "text-markdown",
         "Id": "markdownpart",
         "License": "LGPL 2.1+",
@@ -137,6 +140,7 @@
         "Name[vi]": "Khung xem Markdown",
         "Name[x-test]": "xxMarkdown Viewxx",
         "Name[zh_CN]": "Markdown 视图",
+        "Name[zh_TW]": "Markdown 檢視",
         "ServiceTypes": [
             "KParts/ReadOnlyPart",
             "Browser/View"

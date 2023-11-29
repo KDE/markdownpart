@@ -4,74 +4,76 @@
 # This file is distributed under the same license as the markdownpart package.
 # Automatically generated, 2022.
 #
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-15 01:54+0000\n"
-"PO-Revision-Date: 2022-05-27 00:48+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-11-29 17:04+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
-msgstr ""
+msgstr "複製文字(&C)"
 
 #: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
-msgstr ""
+msgstr "開啟連結"
 
 #: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
-msgstr ""
+msgstr "複製電子郵件地址(&C)"
 
 #: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"
-msgstr ""
+msgstr "複製連結位址(&U)"
 
 #. i18n: ectx: Menu (edit)
 #: markdownpartui.rc:5
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "編輯(&E)"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: searchtoolbar.ui:42
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find:"
-msgstr ""
+msgstr "尋找："
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
 #: searchtoolbar.ui:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to next match"
-msgstr ""
+msgstr "跳至下一個符合"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
 #: searchtoolbar.ui:72
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to previous match"
-msgstr ""
+msgstr "跳至上一個符合"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
 #: searchtoolbar.ui:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Match case sensitive"
-msgstr ""
+msgstr "符合大小寫"

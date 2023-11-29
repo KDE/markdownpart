@@ -48,6 +48,7 @@
   <name xml:lang="vi">KPart trình xem Markdown</name>
   <name xml:lang="x-test">xxMarkdown Viewer KPartxx</name>
   <name xml:lang="zh-CN">Markdown 查看器 KPart</name>
+  <name xml:lang="zh-TW">Markdown 檢視器 KPart</name>
   <summary>Rendered display of Markdown files in KParts-using software</summary>
   <summary xml:lang="ar">تعرض ملفات مارك‌داون في التطبيقات التي تستخدم جزء ك</summary>
   <summary xml:lang="ca">Mostra renderitzats els fitxers Markdown en el programari que utilitza les KParts</summary>
@@ -83,6 +84,7 @@
   <summary xml:lang="vi">Bộ hiển thị kết xuất các tệp Markdown trong các phần mềm dùng KPart</summary>
   <summary xml:lang="x-test">xxRendered display of Markdown files in KParts-using softwarexx</summary>
   <summary xml:lang="zh-CN">在使用 KParts 的软件中显示已渲染的 Markdown 文件</summary>
+  <summary xml:lang="zh-TW">提供利用 KParts 的軟體顯示渲染後的 Markdown 檔案的功能</summary>
   <description>
     <p>The Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.</p>
     <p xml:lang="ar">يمكن عارض مارك‌داون التطبيقات التي تستخدم جزء ك من تصيير وعرض ملفات مارك‌داون.</p>
@@ -118,6 +120,7 @@
     <p xml:lang="vi">KPart trình xem Markdown cho phép các phần mềm dùng KPart có thể hiển thị tệp ở định dạng Markdown trong một khung xem kết xuất.</p>
     <p xml:lang="x-test">xxThe Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.xx</p>
     <p xml:lang="zh-CN">Markdown 查看器 KPart 让使用 KParts 的软件能够在一个视图中显示已渲染的 Markdown 文件。</p>
+    <p xml:lang="zh-TW">Markdown 檢視器這個 KPart 讓利用 KPart 的軟體能夠渲染並顯示 Markdown 格式的檔案。</p>
   </description>
   <url type="homepage">https://commits.kde.org/markdownpart</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=markdownpart&amp;component=general</url>

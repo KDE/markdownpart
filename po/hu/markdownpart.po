@@ -1,0 +1,76 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+#
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
+"PO-Revision-Date: 2024-02-12 20:49+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.4\n"
+
+#: markdownpart.cpp:85
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "Szöveg &másolása"
+
+#: markdownpart.cpp:240
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "Hivatkozás megnyitása"
+
+#: markdownpart.cpp:287
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "&E-mail cím másolása"
+
+#: markdownpart.cpp:300
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "Hivatkozás &címének másolása"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "S&zerkesztés"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "Keresés:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "Ugrás a következő találatra"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "Ugrás az előző találatra"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "Kis- és nagybetű érzékeny"

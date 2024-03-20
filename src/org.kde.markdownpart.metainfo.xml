@@ -28,6 +28,7 @@
   <name xml:lang="fi">Markdown-katselinosa</name>
   <name xml:lang="fr">Afficheur « KPart » de fichiers « Markdown »</name>
   <name xml:lang="gl">KPart de visor de Markdown</name>
+  <name xml:lang="he">KPart להצגת Markdown</name>
   <name xml:lang="hi">मार्कडाउन प्रदर्शक केपार्ट</name>
   <name xml:lang="hu">Markdown-megjelenítő KPart</name>
   <name xml:lang="ia">KPart Visor de Markdown</name>
@@ -66,6 +67,7 @@
   <summary xml:lang="fi">Markdown-tiedostojen hahmonnettu näkymä KPartsia käyttäviin ohjelmiin</summary>
   <summary xml:lang="fr">Affichage de rendu des fichiers « Markdown » avec un logiciel utilisant « KParts »</summary>
   <summary xml:lang="gl">Visualización renderizada de ficheiros Markdown en software que usa KParts.</summary>
+  <summary xml:lang="he">תצוגה מעובדת של קובצי Markdown בתוכנות שמשתמשות ב־KParts</summary>
   <summary xml:lang="hi">केपार्ट्स उपयोगी अनुप्रयोग में मार्कडाउन फ़ाइलों का रेंडर्ड प्रदर्शन करता है</summary>
   <summary xml:lang="hu">Markdown-fájlok renderelt megjelenítése a KPartot használó szoftverekben</summary>
   <summary xml:lang="ia">Monstrator rendite de files de Markdown in software usante KParts</summary>
@@ -104,6 +106,7 @@
     <p xml:lang="fi">Markdown-katselinosa mahdollistaa KPartsia käyttävien ohjelmien näyttää Markdown-tiedostot hahmonnettuna.</p>
     <p xml:lang="fr">L'afficheur « KPart » de fichiers « Markdown » permet à un logiciel utilisant « KParts » d'afficher les fichiers dans le format « Markdown » dans un affichage de rendu.</p>
     <p xml:lang="gl">O KPart de visor de Markdown permite ao software que usa KParts amosar ficheiros en formato Markdown nunha vista renderizada.</p>
+    <p xml:lang="he">ה־KPart להצגת Markdown מאפשר לתוכנות שמשתמשות ב־KParts להציג קבצים בתבנית Markdown בתצוגה מעובדת.</p>
     <p xml:lang="hi">मार्कडाउन प्रदर्शक केपार्ट, केपार्ट्स उपयोगी अनुप्रयोग में मार्कडाउन फ़ाइलों का रेंडर्ड प्रदर्शन करने की अनुमति देता है।</p>
     <p xml:lang="hu">A Markdown-megjelenítő KPart lehetővé teszi a KPartot használó szoftvereknek a Markdown-formátumú fájlok megjelenítését renderelt nézetben.</p>
     <p xml:lang="ia">Le Visor de Markdown KPart permitte que software usante KParts pote monstrar files in formato Markdown in un vista rendite.</p>

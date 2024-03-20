@@ -1,0 +1,76 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+#
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
+"PO-Revision-Date: 2024-03-19 08:19+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: markdownpart.cpp:85
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "ה&עתקת טקסט"
+
+#: markdownpart.cpp:240
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "פתיחת קישור"
+
+#: markdownpart.cpp:287
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "ה&עתקת כתובת דוא״ל"
+
+#: markdownpart.cpp:300
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "העתקת כתובת &קישור"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "ע&ריכה"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "איתור:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "דילוג לתוצאה הבאה"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "דילוג לתוצאה הקודמת"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "התאמת רישיות"

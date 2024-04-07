@@ -1,0 +1,77 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the markdownpart package.
+#
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: markdownpart\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-09-15 01:54+0000\n"
+"PO-Revision-Date: 2024-04-05 15:56+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: markdownpart.cpp:85
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Text"
+msgstr "&Kopēt tekstu"
+
+#: markdownpart.cpp:240
+#, kde-format
+msgctxt "@action"
+msgid "Open Link"
+msgstr "Atvērt saiti"
+
+#: markdownpart.cpp:287
+#, kde-format
+msgctxt "@action"
+msgid "&Copy Email Address"
+msgstr "&Kopēt e-pasta adresi"
+
+#: markdownpart.cpp:300
+#, kde-format
+msgctxt "@action"
+msgid "Copy Link &URL"
+msgstr "Kopēt saites &URL"
+
+#. i18n: ectx: Menu (edit)
+#: markdownpartui.rc:5
+#, kde-format
+msgid "&Edit"
+msgstr "&Rediģēt"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: searchtoolbar.ui:42
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find:"
+msgstr "Meklēt:"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
+#: searchtoolbar.ui:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to next match"
+msgstr "Iet uz nākamo atbilstību"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
+#: searchtoolbar.ui:72
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Jump to previous match"
+msgstr "Iet uz iepriekšējo atbilstību"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
+#: searchtoolbar.ui:85
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Match case sensitive"
+msgstr "Reģistrjutīgs"

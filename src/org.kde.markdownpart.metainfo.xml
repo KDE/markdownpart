@@ -35,6 +35,7 @@
   <name xml:lang="it">Visore KPart Markdown</name>
   <name xml:lang="ka">Markdown -ის დათვალიერება KPart-სთვის</name>
   <name xml:lang="ko">Markdown 뷰어 KPart</name>
+  <name xml:lang="lv">Markdown Viewer KPart</name>
   <name xml:lang="nl">Markdown-viewer van KPart</name>
   <name xml:lang="nn">KPart-framvisar for Markdown</name>
   <name xml:lang="pl">KPart przeglądarki Markdown</name>
@@ -74,6 +75,7 @@
   <summary xml:lang="it">Visualizzazione formattata di file Markdown in software che utilizzano KPart</summary>
   <summary xml:lang="ka">KParts-ში პროგრამულად დარენდერებული Markdown ფაილების ჩვენება</summary>
   <summary xml:lang="ko">KParts를 사용하는 프로그램에서 Markdown 파일을 렌더링하여 표시합니다</summary>
+  <summary xml:lang="lv">Renderēta „Markdown“ datņu parādīšana programmās, kas izmanto „KParts“</summary>
   <summary xml:lang="nl">Toonbare weergave van Markdown-bestanden in software die KParts gebruikt</summary>
   <summary xml:lang="nn">Vising av Markdown-filer i program som støttar KPart</summary>
   <summary xml:lang="pl">Wyświetlanie plików Markdown w oprogramowaniu używającym KPartów</summary>
@@ -113,6 +115,7 @@
     <p xml:lang="it">Il visore KPart per Markdown permette al software che usa KPart di mostrare file in formato Markdown resi in un vista.</p>
     <p xml:lang="ka">Kpart-ის Markdown-ის ნახვის ნაწილი საშუალებას აძლევს KPart-ის გამომყენებელ პროგრამებს, Markdown-ის დარენდერებული ხედი გამოიტანოს.</p>
     <p xml:lang="ko">Markdown 뷰어 KPart를 사용하면 KParts를 사용하는 소프트웨어에서 Markdown 형식을 렌더링해서 볼 수 있습니다.</p>
+    <p xml:lang="lv">„Markdown Viewer KPart“ ļauj programmām, kas izmanto „KParts“, parādīt „Markdown“ formāta datnes renderētā skatā.</p>
     <p xml:lang="nl">De Markdownviewer van KPart stelt software die KPats gebruikt in staat bestanden in Markdown-formaat in een toonbare weergave.</p>
     <p xml:lang="nn">KPart-framvisaren for Markdown lèt deg visa filer Markdown-format i alle program som støttar KPart.</p>
     <p xml:lang="pl">KPart przeglądarki Markdown umożliwia oprogramowaniu, używającemu KPartów na wyświetlanie plików Markdown jako widoki.</p>

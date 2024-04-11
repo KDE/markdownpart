@@ -10,6 +10,7 @@
 #include "ui_searchtoolbar.h"
 // Qt
 #include <QTextBrowser>
+#include <QTextCursor>
 
 
 SearchToolBar::SearchToolBar(QTextBrowser* markdownView, QWidget* parent)
@@ -71,6 +72,13 @@ void SearchToolBar::searchPrevious()
 
 void SearchToolBar::startSearch()
 {
+    // if there is seleted text, assume the user wants to search that selected text
+    // otherwise reuse any old term
+    const QString selectedText = m_markdownView->textCursor().selectedText();
+    if (!selectedText.isEmpty()) {
+        m_ui->searchTextEdit->setText(selectedText);
+    }
+
     show();
     m_ui->searchTextEdit->selectAll();
     m_ui->searchTextEdit->setFocus();

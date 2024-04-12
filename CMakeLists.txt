@@ -36,7 +36,7 @@ ecm_set_disabled_deprecation_versions(
     QT 6.6
     KF 6.0
 )
-
+add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
 add_subdirectory(src)
 
 ki18n_install(po)

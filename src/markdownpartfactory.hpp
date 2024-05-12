@@ -8,7 +8,6 @@
 #define MARKDOWNPARTFACTORY_HPP
 
 // KF
-#include <kcoreaddons_version.h>
 #include <KPluginFactory>
 
 

@@ -11,7 +11,6 @@
 #include <QPoint>
 
 // KF
-#include <kparts_version.h>
 
 #include <KParts/NavigationExtension>
 

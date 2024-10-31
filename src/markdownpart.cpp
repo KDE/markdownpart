@@ -88,19 +88,19 @@ void MarkdownPart::setupActions(Modus modus)
             m_copySelectionAction, &QAction::setEnabled);
     connect(m_copySelectionAction, &QAction::triggered, this, &MarkdownPart::copySelection);
 
-    m_selectAllAction = KStandardAction::selectAll(this, &MarkdownPart::selectAll, actionCollection());
+    m_selectAllAction = KStandardActions::selectAll(this, &MarkdownPart::selectAll, actionCollection());
     m_selectAllAction->setShortcutContext(Qt::WidgetShortcut);
     m_widget->addAction(m_selectAllAction);
 
-    m_searchAction = KStandardAction::find(m_searchToolBar, &SearchToolBar::startSearch, actionCollection());
+    m_searchAction = KStandardActions::find(m_searchToolBar, &SearchToolBar::startSearch, actionCollection());
     m_searchAction->setEnabled(false);
     m_widget->addAction(m_searchAction);
 
-    m_searchNextAction = KStandardAction::findNext(m_searchToolBar, &SearchToolBar::searchNext, actionCollection());
+    m_searchNextAction = KStandardActions::findNext(m_searchToolBar, &SearchToolBar::searchNext, actionCollection());
     m_searchNextAction->setEnabled(false);
     m_widget->addAction(m_searchNextAction);
 
-    m_searchPreviousAction = KStandardAction::findPrev(m_searchToolBar, &SearchToolBar::searchPrevious, actionCollection());
+    m_searchPreviousAction = KStandardActions::findPrev(m_searchToolBar, &SearchToolBar::searchPrevious, actionCollection());
     m_searchPreviousAction->setEnabled(false);
     m_widget->addAction(m_searchPreviousAction);
 

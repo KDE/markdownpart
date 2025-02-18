@@ -114,7 +114,6 @@
         "Description[zh_CN]": "用于在一个类似网页的布局中渲染并显示 Markdown 文件",
         "Description[zh_TW]": "用於在一個像是網頁一樣的佈局中顯示 Markdown 檔案渲染後的結果",
         "Icon": "text-markdown",
-        "Id": "markdownpart",
         "License": "LGPL 2.1+",
         "MimeTypes": [
             "text/markdown"

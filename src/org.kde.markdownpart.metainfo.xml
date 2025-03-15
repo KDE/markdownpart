@@ -47,7 +47,7 @@
   <name xml:lang="sk">KPark prehliadač Markdown</name>
   <name xml:lang="sl">Markdown Viewer KPart</name>
   <name xml:lang="sv">Markdown KPart-visning</name>
-  <name xml:lang="tr">Markdown Görüntüleyicisi KPart'ı</name>
+  <name xml:lang="tr">Markdown Görüntüleyicisi KPart’ı</name>
   <name xml:lang="uk">Модуль перегляду даних markdown</name>
   <name xml:lang="vi">KPart trình xem Markdown</name>
   <name xml:lang="x-test">xxMarkdown Viewer KPartxx</name>
@@ -87,7 +87,7 @@
   <summary xml:lang="sk">Renderované zobrazenie súborov Markdown v softvéri používajúcom KParts</summary>
   <summary xml:lang="sl">Prikaže prikaz datotek Markdown v programski opremi, ki uporablja KParts</summary>
   <summary xml:lang="sv">Återgiven vy för Markdown-filer i programvara som använder KParts</summary>
-  <summary xml:lang="tr">KPart'lar kullanan yazılımlarda Markdown dosyalarının sunulmuş görüntüsü</summary>
+  <summary xml:lang="tr">KPart’lar kullanan yazılımlarda Markdown dosyalarının sunulmuş görüntüsü</summary>
   <summary xml:lang="uk">Показ обробленого вмісту файлів markdown у програмному забезпеченні із підтримкою KParts</summary>
   <summary xml:lang="vi">Bộ hiển thị kết xuất các tệp Markdown trong các phần mềm dùng KPart</summary>
   <summary xml:lang="x-test">xxRendered display of Markdown files in KParts-using softwarexx</summary>
@@ -127,7 +127,7 @@
     <p xml:lang="sk">KPark prehliadača Markdown umožňuje softvéru používajúcemu KParts zobraziť súbory vo formáte Markdown v renderovanom pohľade.</p>
     <p xml:lang="sl">Pregledovalnik Markdown KPart omogoča programski opremi, ki uporablja KParts, za prikazovanje datotek v upodobljenem pogledu.</p>
     <p xml:lang="sv">Markdown KPart-visning tillåter program som använder KParts att visa filer med Markdown-format i en återgiven vy.</p>
-    <p xml:lang="tr">Markdown Görüntüleyicisi KPart'ı, KPart'lar kullanan yazılımlarda son hali dokunmuş Markdown sunumuna izin verir.</p>
+    <p xml:lang="tr">Markdown Görüntüleyicisi KPart’ı, KPart’lar kullanan yazılımlarda son hali dokunmuş Markdown sunumuna izin verir.</p>
     <p xml:lang="uk">Модуль перегляду даних markdown надає змогу переглядати оброблений вміст файлів у форматі markdown у будь-якому програмному забезпеченні із підтримкою KParts.</p>
     <p xml:lang="vi">KPart trình xem Markdown cho phép các phần mềm dùng KPart có thể hiển thị tệp ở định dạng Markdown trong một khung xem kết xuất.</p>
     <p xml:lang="x-test">xxThe Markdown Viewer KPart allows KParts-using software to display files in Markdown format in a rendered view.xx</p>

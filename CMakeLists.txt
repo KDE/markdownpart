@@ -33,8 +33,8 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
 )
 
 ecm_set_disabled_deprecation_versions(
-    QT 6.8.0
-    KF 6.14.0
+    QT 6.10.0
+    KF 6.17.0
 )
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
 add_subdirectory(src)

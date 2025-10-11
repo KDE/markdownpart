@@ -1,7 +1,6 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the markdownpart package.
-#
-# Friedrich W. H. Kossebau <kossebau@kde.org>, 2020.
+# SPDX-FileCopyrightText: 2020 Friedrich W. H. Kossebau <kossebau@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"

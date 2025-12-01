@@ -77,30 +77,3 @@ msgstr "Salta a la coincidència anterior"
 msgctxt "@info:tooltip"
 msgid "Match case sensitive"
 msgstr "Distingeix entre majúscules i minúscules"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Josep M. Ferrer"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "txemaq@gmail.com"
-
-#~ msgid "MarkdownPart"
-#~ msgstr "MarkdownPart"
-
-#~ msgid "For the rendered display of Markdown files in a webpage-like layout"
-#~ msgstr ""
-#~ "Per a la visualització renderitzada de fitxers Markdown en una disposició "
-#~ "semblant a una pàgina web"
-
-#~ msgid "Copyright 2020 Friedrich W. H. Kossebau"
-#~ msgstr "Copyright 2020 Friedrich W. H. Kossebau"
-
-#~ msgctxt "@info:credit"
-#~ msgid "Friedrich W. H. Kossebau"
-#~ msgstr "Friedrich W. H. Kossebau"
-
-#~ msgctxt "@info:credit"
-#~ msgid "Author"
-#~ msgstr "Autor"

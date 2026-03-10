@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/markdownpart/markdownpart.pot\n"
-"X-Crowdin-File-ID: 44957\n"
+"X-Crowdin-File: /kf6-stable/messages/markdownpart/markdownpart.pot\n"
+"X-Crowdin-File-ID: 50672\n"
 
 #: markdownpart.cpp:85
 #, kde-format

@@ -1,59 +1,59 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the markdownpart package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2026 charlotte <altronic25@protonmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Irish Gaelic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2026-03-13 20:05+0000\n"
+"Last-Translator: charlotte <altronic25@protonmail.com>\n"
+"Language-Team: Irish\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
-msgstr ""
+msgstr "&Cóipeáil Téacs"
 
 #: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
-msgstr ""
+msgstr "Oscail Nasc"
 
 #: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
-msgstr ""
+msgstr "&Cóipeáil Seoladh Ríomhphoist"
 
 #: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"
-msgstr ""
+msgstr "Cóipeáil &URL an Naisc"
 
 #. i18n: ectx: Menu (edit)
 #: markdownpartui.rc:5
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "&Eagar"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: searchtoolbar.ui:42
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find:"
-msgstr ""
+msgstr "Aimsigh:"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
 #: searchtoolbar.ui:59

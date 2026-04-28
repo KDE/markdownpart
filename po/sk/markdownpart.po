@@ -57,7 +57,7 @@ msgstr "Nájsť:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to next match"
-msgstr "Prejsť na ďaľšiu zhodu"
+msgstr "Prejsť na ďalšiu zhodu"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
 #: searchtoolbar.ui:72

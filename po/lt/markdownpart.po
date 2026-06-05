@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: markdownpart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: 2020-08-18 02:32+0200\n"
+"PO-Revision-Date: 2026-06-04 13:40+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,61 +17,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.9\n"
 
 #: markdownpart.cpp:85
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Text"
-msgstr ""
+msgstr "&Kopijuoti tekstą"
 
 #: markdownpart.cpp:240
 #, kde-format
 msgctxt "@action"
 msgid "Open Link"
-msgstr ""
+msgstr "Atverti nuorodą"
 
 #: markdownpart.cpp:287
 #, kde-format
 msgctxt "@action"
 msgid "&Copy Email Address"
-msgstr ""
+msgstr "&Kopijuoti el. pašto adresą"
 
 #: markdownpart.cpp:300
 #, kde-format
 msgctxt "@action"
 msgid "Copy Link &URL"
-msgstr ""
+msgstr "Kopijuoti nuorodos &URL"
 
 #. i18n: ectx: Menu (edit)
 #: markdownpartui.rc:5
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "&Taisyti"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: searchtoolbar.ui:42
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find:"
-msgstr ""
+msgstr "Ieškoti:"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, nextButton)
 #: searchtoolbar.ui:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to next match"
-msgstr ""
+msgstr "Peršokti prie kitos atitikties"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, previousButton)
 #: searchtoolbar.ui:72
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to previous match"
-msgstr ""
+msgstr "Peršokti prie ankstesnės atitikties"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, matchCaseCheckButton)
 #: searchtoolbar.ui:85
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Match case sensitive"
-msgstr ""
+msgstr "Skirti raidžių dydį"

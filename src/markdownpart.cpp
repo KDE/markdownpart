@@ -119,6 +119,12 @@ void MarkdownPart::setupActions(Modus modus)
     m_searchPreviousAction->setEnabled(false);
     m_widget->addAction(m_searchPreviousAction);
 
+    m_toggleViewAction = new QAction(i18nc("@action", "View Source"), this);
+    m_toggleViewAction->setCheckable(true);
+    actionCollection()->addAction(QStringLiteral("toggle_view"), m_toggleViewAction);
+    connect(m_toggleViewAction, &QAction::triggered, this, &MarkdownPart::toggleView);
+    m_widget->addAction(m_toggleViewAction);
+
     auto* closeFindBarShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), widget());
     closeFindBarShortcut->setContext(Qt::WidgetWithChildrenShortcut);
     connect(closeFindBarShortcut, &QShortcut::activated, m_searchToolBar, &SearchToolBar::hide);
@@ -141,6 +147,9 @@ bool MarkdownPart::openFile()
     MD::Parser parser;
     auto doc = parser.parse(localFilePath(), true);
     QString html = MD::toHtml<MarkdownVisitor>(doc);
+    
+    m_rawMarkdown = text;
+    m_renderedHtml = html;
     
     applyStyleSheet();
     m_sourceDocument->setHtml(html);
@@ -191,6 +200,9 @@ bool MarkdownPart::doCloseStream()
     MD::Parser parser;
     auto doc = parser.parse(stream, QString(), QString());
     QString html = MD::toHtml<MarkdownVisitor>(doc);
+
+    m_rawMarkdown = text;
+    m_renderedHtml = html;
 
     applyStyleSheet();
     m_sourceDocument->setHtml(html);
@@ -260,6 +272,8 @@ void MarkdownPart::handleContextMenuRequest(QPoint globalPos,
             if (m_searchToolBar->isHidden()) {
                 menu.addAction(m_searchAction);
             }
+            menu.addSeparator();
+            menu.addAction(m_toggleViewAction);
         }
     } else {
         QAction* action = menu.addAction(i18nc("@action", "Open Link"));
@@ -340,6 +354,17 @@ void MarkdownPart::copySelection()
 void MarkdownPart::selectAll()
 {
     m_widget->selectAll();
+}
+
+void MarkdownPart::toggleView()
+{
+    m_isSourceView = !m_isSourceView;
+    m_toggleViewAction->setChecked(m_isSourceView);
+    if (m_isSourceView) {
+        m_sourceDocument->setPlainText(m_rawMarkdown);
+    } else {
+        m_sourceDocument->setHtml(m_renderedHtml);
+    }
 }
 
 QUrl MarkdownPart::resolvedUrl(const QUrl &url) const

@@ -60,6 +60,8 @@ private:
     void setupActions(Modus modus);
     void applyStyleSheet();
 
+    void toggleView();
+
     void prepareViewStateRestoringOnReload();
     void restoreScrollPosition();
 
@@ -80,10 +82,15 @@ private:
     QAction* m_searchAction;
     QAction* m_searchNextAction;
     QAction* m_searchPreviousAction;
+    QAction* m_toggleViewAction;
 
     MarkdownBrowserExtension* const m_browserExtension;
 
     QByteArray m_streamedData;
+
+    QString m_rawMarkdown;
+    QString m_renderedHtml;
+    bool m_isSourceView = false;
 
     QUrl m_previousUrl;
     QPoint m_previousScrollPosition;

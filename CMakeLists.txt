@@ -23,8 +23,11 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMDeprecationSettings)
 include(FeatureSummary)
+
+kde_enable_exceptions()
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Widgets
+    Svg
 )
 
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
@@ -44,6 +47,19 @@ FetchContent_Declare(
 )
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 FetchContent_MakeAvailable(md4qt)
+
+FetchContent_Declare(
+    GIT_TAG        master
+)
+
+FetchContent_Declare(
+    GIT_TAG        master
+)
+if(NOT microtex_POPULATED)
+    
+    set(QT ON CACHE BOOL "Compile using Qt instead of Win32/Gtk" FORCE)
+    add_subdirectory(${microtex_SOURCE_DIR} ${microtex_BINARY_DIR})
+endif()
 
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT -DMD4QT_QT_SUPPORT)
 add_subdirectory(src)

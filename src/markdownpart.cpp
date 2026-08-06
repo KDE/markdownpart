@@ -33,6 +33,7 @@
 #include <QVBoxLayout>
 
 
+
 MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPluginMetaData& metaData, Modus modus)
     : KParts::ReadOnlyPart(parent, metaData)
     , m_sourceDocument(new QTextDocument(this))
@@ -74,6 +75,8 @@ MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPlugin
             this, &MarkdownPart::showHoveredLink);
 
     setupActions(modus);
+
+    }
 }
 
 MarkdownPart::~MarkdownPart() = default;

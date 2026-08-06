@@ -58,6 +58,8 @@ protected: // KParts::ReadOnlyPart API
 
 private:
     void setupActions(Modus modus);
+    void applyStyleSheet();
+
     void prepareViewStateRestoringOnReload();
     void restoreScrollPosition();
 

@@ -35,6 +35,10 @@
 #include "markdownvisitor.h"
 #include "latex.h"
 
+#include <QFileInfo>
+#include <QDir>
+#include <QStandardPaths>
+
 
 MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPluginMetaData& metaData, Modus modus)
     : KParts::ReadOnlyPart(parent, metaData)
@@ -138,6 +142,7 @@ bool MarkdownPart::openFile()
     auto doc = parser.parse(localFilePath(), true);
     QString html = MD::toHtml<MarkdownVisitor>(doc);
     
+    applyStyleSheet();
     m_sourceDocument->setHtml(html);
     const QUrl b = QUrl::fromLocalFile(localFilePath()).adjusted(QUrl::RemoveFilename);
     m_sourceDocument->setBaseUrl(b);
@@ -187,6 +192,7 @@ bool MarkdownPart::doCloseStream()
     auto doc = parser.parse(stream, QString(), QString());
     QString html = MD::toHtml<MarkdownVisitor>(doc);
 
+    applyStyleSheet();
     m_sourceDocument->setHtml(html);
     m_sourceDocument->setBaseUrl(QUrl());
 
@@ -345,6 +351,29 @@ QUrl MarkdownPart::resolvedUrl(const QUrl &url) const
     }
 
     return (u.adjusted(QUrl::NormalizePathSegments));
+}
+
+void MarkdownPart::applyStyleSheet()
+{
+    QString cssPath;
+    if (url().isLocalFile()) {
+        QFileInfo fileInfo(localFilePath());
+        cssPath = fileInfo.dir().filePath(fileInfo.completeBaseName() + QStringLiteral(".css"));
+    }
+    
+    QFile cssFile(cssPath);
+    if (!cssFile.exists() || !cssFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        // Fallback to ~/.config/markdownpart.css
+        cssPath = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, QStringLiteral("markdownpart.css"));
+        cssFile.setFileName(cssPath);
+        if (!cssFile.exists() || !cssFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            m_sourceDocument->setDefaultStyleSheet(QString());
+            return;
+        }
+    }
+    
+    QTextStream stream(&cssFile);
+    m_sourceDocument->setDefaultStyleSheet(stream.readAll());
 }
 
 #include "moc_markdownpart.cpp"

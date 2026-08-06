@@ -21,6 +21,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMimeDatabase>
+#include <parser.h>
+#include <html.h>
 #include <QBuffer>
 #include <QShortcut>
 #include <QDesktopServices>
@@ -123,7 +125,11 @@ bool MarkdownPart::openFile()
 
     file.close();
 
-    m_sourceDocument->setMarkdown(text);
+    MD::Parser parser;
+    auto doc = parser.parse(localFilePath(), true);
+    QString html = MD::toHtml(doc);
+    
+    m_sourceDocument->setHtml(html);
     const QUrl b = QUrl::fromLocalFile(localFilePath()).adjusted(QUrl::RemoveFilename);
     m_sourceDocument->setBaseUrl(b);
 
@@ -168,7 +174,11 @@ bool MarkdownPart::doCloseStream()
     QTextStream stream(&buffer);
     QString text = stream.readAll();
 
-    m_sourceDocument->setMarkdown(text);
+    MD::Parser parser;
+    auto doc = parser.parse(stream, QString(), QString());
+    QString html = MD::toHtml(doc);
+
+    m_sourceDocument->setHtml(html);
     m_sourceDocument->setBaseUrl(QUrl());
 
     restoreScrollPosition();

@@ -36,7 +36,16 @@ ecm_set_disabled_deprecation_versions(
     QT 6.10.0
     KF 6.17.0
 )
-add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
+include(FetchContent)
+FetchContent_Declare(
+    md4qt
+    GIT_REPOSITORY https://github.com/igormironchik/md4qt.git
+    GIT_TAG        main
+)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+FetchContent_MakeAvailable(md4qt)
+
+add_definitions(-DQT_NO_CONTEXTLESS_CONNECT -DMD4QT_QT_SUPPORT)
 add_subdirectory(src)
 
 ki18n_install(po)

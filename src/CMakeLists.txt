@@ -25,7 +25,10 @@ target_link_libraries(markdownpart
     KF6::I18n
     KF6::Parts
     Qt6::Widgets
+    md4qt::md4qt
 )
+
+target_include_directories(markdownpart PRIVATE ${md4qt_SOURCE_DIR}/src)
 
 install(TARGETS markdownpart  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
 

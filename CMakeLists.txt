@@ -28,6 +28,7 @@ kde_enable_exceptions()
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Widgets
     Svg
+    PrintSupport
 )
 
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS

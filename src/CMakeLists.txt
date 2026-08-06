@@ -27,6 +27,7 @@ target_link_libraries(markdownpart
     KF6::Parts
     Qt6::Widgets
     Qt6::Svg
+    Qt6::PrintSupport
     md4qt::md4qt
     LaTeX
 )

@@ -31,6 +31,8 @@
 #include <QApplication>
 #include <QMenu>
 #include <QVBoxLayout>
+#include <QPrinter>
+#include <QPrintDialog>
 
 #include "markdownvisitor.h"
 #include "latex.h"
@@ -124,6 +126,9 @@ void MarkdownPart::setupActions(Modus modus)
     actionCollection()->addAction(QStringLiteral("toggle_view"), m_toggleViewAction);
     connect(m_toggleViewAction, &QAction::triggered, this, &MarkdownPart::toggleView);
     m_widget->addAction(m_toggleViewAction);
+
+    m_printAction = KStandardAction::print(this, &MarkdownPart::print, actionCollection());
+    m_widget->addAction(m_printAction);
 
     auto* closeFindBarShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), widget());
     closeFindBarShortcut->setContext(Qt::WidgetWithChildrenShortcut);
@@ -274,6 +279,7 @@ void MarkdownPart::handleContextMenuRequest(QPoint globalPos,
             }
             menu.addSeparator();
             menu.addAction(m_toggleViewAction);
+            menu.addAction(m_printAction);
         }
     } else {
         QAction* action = menu.addAction(i18nc("@action", "Open Link"));
@@ -364,6 +370,15 @@ void MarkdownPart::toggleView()
         m_sourceDocument->setPlainText(m_rawMarkdown);
     } else {
         m_sourceDocument->setHtml(m_renderedHtml);
+    }
+}
+
+void MarkdownPart::print()
+{
+    QPrinter printer;
+    QPrintDialog dialog(&printer, widget());
+    if (dialog.exec() == QDialog::Accepted) {
+        m_widget->print(&printer);
     }
 }
 

@@ -72,6 +72,7 @@ private:
     void showHoveredLink(const QUrl& linkUrl);
 
     void selectAll();
+    void print();
 
 private:
     QTextDocument* m_sourceDocument;
@@ -83,6 +84,7 @@ private:
     QAction* m_searchNextAction;
     QAction* m_searchPreviousAction;
     QAction* m_toggleViewAction;
+    QAction* m_printAction;
 
     MarkdownBrowserExtension* const m_browserExtension;
 

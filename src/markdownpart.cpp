@@ -202,6 +202,8 @@ bool MarkdownPart::doCloseStream()
     QTextStream stream(&buffer);
     QString text = stream.readAll();
 
+    stream.seek(0);
+
     MD::Parser parser;
     auto doc = parser.parse(stream, QString(), QString());
     QString html = MD::toHtml<MarkdownVisitor>(doc);

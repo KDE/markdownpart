@@ -32,6 +32,8 @@
 #include <QMenu>
 #include <QVBoxLayout>
 
+#include "markdownvisitor.h"
+#include "latex.h"
 
 
 MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPluginMetaData& metaData, Modus modus)
@@ -76,6 +78,10 @@ MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPlugin
 
     setupActions(modus);
 
+    static bool microtex_initialized = false;
+    if (!microtex_initialized) {
+        tex::LaTeX::init();
+        microtex_initialized = true;
     }
 }
 
@@ -130,7 +136,7 @@ bool MarkdownPart::openFile()
 
     MD::Parser parser;
     auto doc = parser.parse(localFilePath(), true);
-    QString html = MD::toHtml(doc);
+    QString html = MD::toHtml<MarkdownVisitor>(doc);
     
     m_sourceDocument->setHtml(html);
     const QUrl b = QUrl::fromLocalFile(localFilePath()).adjusted(QUrl::RemoveFilename);
@@ -179,7 +185,7 @@ bool MarkdownPart::doCloseStream()
 
     MD::Parser parser;
     auto doc = parser.parse(stream, QString(), QString());
-    QString html = MD::toHtml(doc);
+    QString html = MD::toHtml<MarkdownVisitor>(doc);
 
     m_sourceDocument->setHtml(html);
     m_sourceDocument->setBaseUrl(QUrl());

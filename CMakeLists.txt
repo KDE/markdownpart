@@ -48,14 +48,28 @@ FetchContent_Declare(
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 FetchContent_MakeAvailable(md4qt)
 
+# Fetch tinyxml2 statically
 FetchContent_Declare(
+    tinyxml2
+    GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
     GIT_TAG        master
 )
+FetchContent_MakeAvailable(tinyxml2)
 
+# Fetch MicroTeX and patch its CMakeLists.txt to avoid pkg-config for tinyxml2
 FetchContent_Declare(
+    MicroTeX
+    GIT_REPOSITORY https://github.com/NanoMichael/MicroTeX.git
     GIT_TAG        master
 )
+FetchContent_GetProperties(MicroTeX)
 if(NOT microtex_POPULATED)
+    FetchContent_Populate(MicroTeX)
+    file(READ "${microtex_SOURCE_DIR}/CMakeLists.txt" MICROTEX_CMAKE)
+    string(REPLACE "find_package(PkgConfig REQUIRED)" "#find_package(PkgConfig REQUIRED)" MICROTEX_CMAKE "${MICROTEX_CMAKE}")
+    string(REPLACE "pkg_check_modules(tinyxml2 REQUIRED IMPORTED_TARGET tinyxml2)" "#pkg_check_modules" MICROTEX_CMAKE "${MICROTEX_CMAKE}")
+    string(REPLACE "add_library(LaTeX \"\")" "add_library(LaTeX STATIC \"\")" MICROTEX_CMAKE "${MICROTEX_CMAKE}")
+    file(WRITE "${microtex_SOURCE_DIR}/CMakeLists.txt" "${MICROTEX_CMAKE}")
     
     set(QT ON CACHE BOOL "Compile using Qt instead of Win32/Gtk" FORCE)
     add_subdirectory(${microtex_SOURCE_DIR} ${microtex_BINARY_DIR})

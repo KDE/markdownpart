@@ -10,6 +10,7 @@ target_sources(markdownpart PRIVATE
     markdownpartfactory.cpp
     markdownpart.cpp
     markdownbrowserextension.cpp
+    markdownvisitor.cpp
     markdownview.hpp
     markdownbrowserextension.hpp
     markdownpart.hpp
@@ -25,7 +26,9 @@ target_link_libraries(markdownpart
     KF6::I18n
     KF6::Parts
     Qt6::Widgets
+    Qt6::Svg
     md4qt::md4qt
+    LaTeX
 )
 
 target_include_directories(markdownpart PRIVATE ${md4qt_SOURCE_DIR}/src)

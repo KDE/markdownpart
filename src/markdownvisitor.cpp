@@ -105,9 +105,36 @@ void MarkdownVisitor::onCode(MD::Code *c)
     if (c->isFensedCode() && (syntax == QStringLiteral("mermaid") || syntax == QStringLiteral("plantuml") || syntax == QStringLiteral("puml"))) {
         QByteArray imgData;
         if (syntax == QStringLiteral("mermaid")) {
-            imgData = runMermaidWeb(c->text());
-            // Note: fixMermaidSvgText adjusts em-unit y positions for QSvgRenderer,
-            // but rsvg-convert handles the original SVG natively — skip it here.
+            QByteArray svgData = runMermaidWeb(c->text());
+            if (!svgData.isEmpty()) {
+                QString svgStr = QString::fromUtf8(svgData);
+                // Mermaid generates <foreignObject> for text which rsvg-convert drops.
+                // Replace them with native <text> elements.
+                QRegularExpression foreignObjRe(QStringLiteral("<foreignObject\\s+width=\"([^\"]+)\"\\s+height=\"([^\"]+)\"[^>]*>.*?<span[^>]*>(?:<p>)?(.*?)(?:</p>)?</span>.*?</foreignObject>"));
+                QRegularExpressionMatchIterator foreignIt = foreignObjRe.globalMatch(svgStr);
+                QList<QRegularExpressionMatch> foreignMatches;
+                while (foreignIt.hasNext()) { foreignMatches.append(foreignIt.next()); }
+                for (int i = foreignMatches.size() - 1; i >= 0; --i) {
+                    const QRegularExpressionMatch& match = foreignMatches.at(i);
+                    double w = match.captured(1).toDouble();
+                    double h = match.captured(2).toDouble();
+                    QString text = match.captured(3);
+                    QString replacement = QStringLiteral(R"(<text x="%1" y="%2" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14px" fill="#333">%3</text>)").arg(w / 2.0).arg(h / 2.0).arg(text);
+                    svgStr.replace(match.capturedStart(0), match.capturedLength(0), replacement);
+                }
+
+                // Render transparent SVG via rsvg-convert at 4x to ensure high-quality thin lines
+                QByteArray pngData4x = renderSvgToPngViaRsvg(svgStr.toUtf8(), 4.0);
+                if (!pngData4x.isEmpty()) {
+                    QImage img4x;
+                    img4x.loadFromData(pngData4x);
+                    // Smooth-scale back to 1x to avoid QTextDocument interpolation issues (double-blur)
+                    QImage img1x = img4x.scaled(img4x.width() / 4, img4x.height() / 4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    QBuffer buffer(&imgData);
+                    buffer.open(QIODevice::WriteOnly);
+                    img1x.save(&buffer, "PNG");
+                }
+            }
         } else {
             imgData = runPlantUmlWeb(c->text());
         }
@@ -131,10 +158,12 @@ void MarkdownVisitor::onCode(MD::Code *c)
 
 QByteArray MarkdownVisitor::runMermaidWeb(const QString& code)
 {
-    // Request PNG directly from mermaid.ink — the server renders with proper
-    // font antialiasing, bypassing foreignObject/SVG rendering issues entirely.
-    QByteArray base64 = code.toUtf8().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals);
-    QString url = QStringLiteral("https://mermaid.ink/img/") + QString::fromUtf8(base64);
+    // Request transparent SVG from mermaid.ink. We must use SVG and convert it locally 
+    // because their PNG /img/ endpoint does not support transparency (returns JPEG).
+    QString config = QStringLiteral("%%{init: {\"flowchart\": {\"htmlLabels\": false}, \"sequence\": {\"htmlLabels\": false}, \"gantt\": {\"htmlLabels\": false}, \"journey\": {\"htmlLabels\": false}, \"class\": {\"htmlLabels\": false}, \"state\": {\"htmlLabels\": false}, \"er\": {\"htmlLabels\": false}, \"pie\": {\"htmlLabels\": false}, \"c4\": {\"htmlLabels\": false}, \"themeVariables\": {\"background\": \"transparent\"}}}%%\n");
+    QString fullCode = config + code;
+    QByteArray base64 = fullCode.toUtf8().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals);
+    QString url = QStringLiteral("https://mermaid.ink/svg/") + QString::fromUtf8(base64);
 
     QProcess proc;
     QStringList args;
@@ -150,9 +179,16 @@ QByteArray MarkdownVisitor::runMermaidWeb(const QString& code)
 
 QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
 {
-    // Request PNG directly from plantuml.com — the Java renderer produces
-    // crisp output without the thin-stroke aliasing issues of SVG + rsvg-convert.
-    QString hexStr = QStringLiteral("~h") + QString::fromUtf8(code.toUtf8().toHex());
+    // Request transparent PNG directly from plantuml.com
+    QString modifiedCode = code;
+    int startIdx = modifiedCode.indexOf(QStringLiteral("@startuml"));
+    if (startIdx != -1) {
+        modifiedCode.insert(startIdx + 9, QStringLiteral("\nskinparam backgroundColor transparent\n"));
+    } else {
+        modifiedCode.prepend(QStringLiteral("skinparam backgroundColor transparent\n"));
+    }
+
+    QString hexStr = QStringLiteral("~h") + QString::fromUtf8(modifiedCode.toUtf8().toHex());
     QString url = QStringLiteral("http://www.plantuml.com/plantuml/png/") + hexStr;
 
     QProcess proc;

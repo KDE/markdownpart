@@ -25,17 +25,23 @@ void MarkdownVisitor::onMath(MD::Math *m) {
     
     std::wstring tex = m->text().toStdWString();
     
-    // Parse the LaTeX string using MicroTeX
-    // width: 800 (or 0 for wrap?), textSize: 12.0f, lineSpace: 12.0f, color: black
+    // Parse the LaTeX string using MicroTeX.
+    // textSize is in points; we oversample for smooth downscaling.
+    // PIXELS_PER_POINT=1.0, so getWidth()/getHeight() return pixels at textSize.
+    constexpr int oversample = 6;
+    constexpr float baseTextSize = 16.0f; // logical display size in points/px
+    constexpr float renderTextSize = baseTextSize * oversample; // 96pt
     tex::TeXRender* render = nullptr;
     try {
-        render = tex::LaTeX::parse(tex, 0, 48.0f, 48.0f, 0xff1a2b3c);
+        render = tex::LaTeX::parse(tex, 0, renderTextSize, renderTextSize, 0xff1a2b3c);
     } catch (const std::exception& e) {
         qWarning() << "LaTeX parsing error:" << e.what();
     }
 
     if (render) {
-        int padding = 12; // 4 * 3
+        // getWidth()/getHeight() already incorporate renderTextSize.
+        // Add padding scaled to the oversample factor.
+        int padding = 4 * oversample;
         int physicalWidth = render->getWidth() + padding * 2;
         int physicalHeight = render->getHeight() + render->getDepth() + padding * 2;
         
@@ -57,16 +63,21 @@ void MarkdownVisitor::onMath(MD::Math *m) {
         QByteArray ba;
         QBuffer buffer(&ba);
         buffer.open(QIODevice::WriteOnly);
-        image.save(&buffer, "PNG");
-        
-        // The image was rendered at 48pt (3× the 16pt base). Display at logical size.
-        int logicalWidth = physicalWidth / 3;
-        int logicalHeight = physicalHeight / 3;
+        // Smooth-scale from the 6× render to 2× before encoding, giving
+        // QTextDocument a high-quality source image to display at 1× size.
+        int logicalWidth = physicalWidth / oversample;
+        int logicalHeight = physicalHeight / oversample;
+        QImage scaledImage = image.scaled(logicalWidth * 2, logicalHeight * 2,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation);
+        scaledImage.save(&buffer, "PNG");
         
         QByteArray base64Img = ba.toBase64();
-        QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) + 
-                         QStringLiteral("\" width=\"") + QString::number(logicalWidth) + 
-                         QStringLiteral("\" height=\"") + QString::number(logicalHeight) + QStringLiteral("\" />");
+        // Embed at 2× pixels, display at 1× via width/height.
+        QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
+                         QStringLiteral("\" width=\"") + QString::number(logicalWidth) +
+                         QStringLiteral("\" height=\"") + QString::number(logicalHeight) +
+                         QStringLiteral("\" />");
         
         if (m->isInline()) {
             m_html += QStringLiteral("<span class=\"math inline\">") + imgTag + QStringLiteral("</span>");
@@ -101,8 +112,36 @@ void MarkdownVisitor::onCode(MD::Code *c)
         }
 
         if (!imgData.isEmpty()) {
-            QByteArray base64Img = imgData.toBase64();
-            QString imgTag = QStringLiteral("<img src=\"data:image/svg+xml;base64,") + QString::fromUtf8(base64Img) + QStringLiteral("\" />");
+            // Pre-render the SVG to a 4× PNG with antialiasing enabled, then
+            // embed it with explicit 1× display dimensions. QTextDocument will
+            // smooth-scale the high-res source down for crisp display.
+            QSvgRenderer renderer(imgData);
+            QSize svgSize = renderer.defaultSize();
+            if (!svgSize.isValid() || svgSize.isEmpty()) {
+                svgSize = QSize(600, 400);
+            }
+            constexpr int scale = 4;
+            QImage svgImage(svgSize * scale, QImage::Format_ARGB32_Premultiplied);
+            svgImage.fill(Qt::white);
+            QPainter svgPainter(&svgImage);
+            svgPainter.setRenderHint(QPainter::Antialiasing);
+            svgPainter.setRenderHint(QPainter::SmoothPixmapTransform);
+            svgPainter.setRenderHint(QPainter::TextAntialiasing);
+            renderer.render(&svgPainter);
+            svgPainter.end();
+            // Embed the 4× PNG directly — QTextDocument's QPainter uses
+            // SmoothPixmapTransform when drawing images, so the 4:1 downscale
+            // to the display dimensions is handled with high quality.
+            QByteArray pngData;
+            QBuffer pngBuf(&pngData);
+            pngBuf.open(QIODevice::WriteOnly);
+            svgImage.save(&pngBuf, "PNG");
+            QByteArray base64Img = pngData.toBase64();
+            // Embed at 2× pixels, display at 1× via width/height.
+            QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
+                             QStringLiteral("\" width=\"") + QString::number(svgSize.width()) +
+                             QStringLiteral("\" height=\"") + QString::number(svgSize.height()) +
+                             QStringLiteral("\" />");
             m_html.append(QStringLiteral("<p align=\"center\">\n"));
             m_html.append(imgTag);
             m_html.append(QStringLiteral("</p>\n"));

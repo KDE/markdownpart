@@ -13,6 +13,7 @@ protected:
 
 private:
     QByteArray runMermaidWeb(const QString& code);
-    QByteArray runPlantUmlWeb(const QString& code);
+    QByteArray runPlantUmlWeb(const QString& puml);
     QByteArray fixMermaidSvgText(const QByteArray& svgData);
+    QByteArray svgToHighDpiPng(const QByteArray& svgData, float scale, int& logicalWidth, int& logicalHeight);
 };

@@ -109,56 +109,32 @@ void MarkdownVisitor::onCode(MD::Code *c)
     QString syntax = c->syntax().toLower();
     if (c->isFensedCode() && (syntax == QStringLiteral("mermaid") || syntax == QStringLiteral("plantuml") || syntax == QStringLiteral("puml"))) {
         QByteArray imgData;
+        int logicalWidth = 0, logicalHeight = 0;
+        
         if (syntax == QStringLiteral("mermaid")) {
             QByteArray svgData = runMermaidWeb(c->text());
             if (!svgData.isEmpty()) {
-                QString svgStr = QString::fromUtf8(svgData);
-                // Mermaid generates <foreignObject> for text which rsvg-convert drops.
-                // Replace them with native <text> elements.
-                QRegularExpression foreignObjRe(QStringLiteral("<foreignObject\\s+width=\"([^\"]+)\"\\s+height=\"([^\"]+)\"[^>]*>.*?<span[^>]*>(?:<p>)?(.*?)(?:</p>)?</span>.*?</foreignObject>"));
-                QRegularExpressionMatchIterator foreignIt = foreignObjRe.globalMatch(svgStr);
-                QList<QRegularExpressionMatch> foreignMatches;
-                while (foreignIt.hasNext()) { foreignMatches.append(foreignIt.next()); }
-                for (int i = foreignMatches.size() - 1; i >= 0; --i) {
-                    const QRegularExpressionMatch& match = foreignMatches.at(i);
-                    double w = match.captured(1).toDouble();
-                    double h = match.captured(2).toDouble();
-                    QString text = match.captured(3);
-                    QString replacement = QStringLiteral(R"(<text x="%1" y="%2" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14px" fill="#333">%3</text>)").arg(w / 2.0).arg(h / 2.0).arg(text);
-                    svgStr.replace(match.capturedStart(0), match.capturedLength(0), replacement);
-                }
-
-                // Render transparent SVG via QSvgRenderer at 4x to ensure high-quality thin lines
-                QSvgRenderer renderer(svgStr.toUtf8());
-                QSize sz = renderer.defaultSize();
-                if (!sz.isEmpty()) {
-                    QImage img4x(sz.width() * 4, sz.height() * 4, QImage::Format_ARGB32_Premultiplied);
-                    img4x.fill(Qt::transparent);
-                    QPainter p(&img4x);
-                    p.setRenderHint(QPainter::Antialiasing);
-                    p.setRenderHint(QPainter::TextAntialiasing);
-                    p.setRenderHint(QPainter::SmoothPixmapTransform);
-                    renderer.render(&p);
-                    p.end();
-
-                    // Smooth-scale back to 1x to avoid QTextDocument interpolation issues (double-blur)
-                    QImage img1x = img4x.scaled(sz, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-                    QBuffer buffer(&imgData);
-                    buffer.open(QIODevice::WriteOnly);
-                    img1x.save(&buffer, "PNG");
-                }
+                svgData = fixMermaidSvgText(svgData);
+                // Pass scale=2 for High-DPI
+                imgData = svgToHighDpiPng(svgData, 2.0f, logicalWidth, logicalHeight);
             }
         } else {
-            imgData = runPlantUmlWeb(c->text());
+            QByteArray svgData = runPlantUmlWeb(c->text());
+            if (!svgData.isEmpty()) {
+                imgData = svgToHighDpiPng(svgData, 2.0f, logicalWidth, logicalHeight);
+            }
         }
 
         if (!imgData.isEmpty()) {
-            // Both runMermaidWeb and runPlantUmlWeb now return PNG bytes directly
-            // from the server-side renderer (mermaid.ink/img and plantuml.com/png).
-            // Just base64-encode and embed inline.
             QByteArray base64Img = imgData.toBase64();
-            QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
-                             QStringLiteral("\" />");
+            QString imgTag;
+            if (logicalWidth > 0 && logicalHeight > 0) {
+                imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
+                         QStringLiteral("\" width=\"%1\" height=\"%2\" />").arg(logicalWidth).arg(logicalHeight);
+            } else {
+                imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
+                         QStringLiteral("\" />");
+            }
             m_html.append(QStringLiteral("<p align=\"center\">\n"));
             m_html.append(imgTag);
             m_html.append(QStringLiteral("</p>\n"));
@@ -206,7 +182,7 @@ QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
     }
 
     QString hexStr = QStringLiteral("~h") + QString::fromUtf8(modifiedCode.toUtf8().toHex());
-    QString url = QStringLiteral("http://www.plantuml.com/plantuml/png/") + hexStr;
+    QString url = QStringLiteral("http://www.plantuml.com/plantuml/svg/") + hexStr;
 
     QNetworkAccessManager manager;
     QNetworkRequest request((QUrl(url)));
@@ -308,3 +284,45 @@ QByteArray MarkdownVisitor::fixMermaidSvgText(const QByteArray& svgData)
     return svgStr.toUtf8();
 }
 
+QByteArray MarkdownVisitor::svgToHighDpiPng(const QByteArray& svgData, float scale, int& logicalWidth, int& logicalHeight)
+{
+    QSvgRenderer renderer(svgData);
+    if (!renderer.isValid()) return QByteArray();
+    
+    QSize defaultSize = renderer.defaultSize();
+    if (defaultSize.isEmpty()) {
+        QRectF viewBox = renderer.viewBoxF();
+        if (!viewBox.isEmpty()) {
+            defaultSize = viewBox.size().toSize();
+        } else {
+            defaultSize = QSize(800, 600);
+        }
+    }
+    
+    logicalWidth = defaultSize.width();
+    logicalHeight = defaultSize.height();
+    
+    QSize scaledSize = defaultSize * scale;
+    QImage image(scaledSize, QImage::Format_ARGB32_Premultiplied);
+    // Use transparent #FAFAFA (Kate background) instead of transparent black.
+    // This prevents a dark fringe/halo when the subpixel antialiasing is composited.
+    image.fill(QColor(0xFA, 0xFA, 0xFA, 0));
+    
+    QPainter painter(&image);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::TextAntialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    
+    renderer.render(&painter);
+    painter.end();
+    
+    // We do NOT scale back to 1x here! We save the high-res image directly,
+    // and rely on the HTML <img width="X" height="Y"> attributes to scale it
+    // visually. This guarantees crispness on high-DPI screens without QTextDocument double lines!
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    
+    return ba;
+}

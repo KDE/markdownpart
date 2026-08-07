@@ -1,6 +1,7 @@
 #include "markdownvisitor.h"
 #include <QRegularExpression>
 #include <QProcess>
+#include <QSvgRenderer>
 #include <QDebug>
 
 
@@ -28,35 +29,49 @@ void MarkdownVisitor::onMath(MD::Math *m) {
     // width: 800 (or 0 for wrap?), textSize: 12.0f, lineSpace: 12.0f, color: black
     tex::TeXRender* render = nullptr;
     try {
-        render = tex::LaTeX::parse(tex, 0, 16.0f, 16.0f, 0xff000000);
+        render = tex::LaTeX::parse(tex, 0, 48.0f, 48.0f, 0xff1a2b3c);
     } catch (const std::exception& e) {
         qWarning() << "LaTeX parsing error:" << e.what();
     }
-    
+
     if (render) {
-        QBuffer buffer;
-        QSvgGenerator svgGen;
-        svgGen.setOutputDevice(&buffer);
+        int padding = 12; // 4 * 3
+        int physicalWidth = render->getWidth() + padding * 2;
+        int physicalHeight = render->getHeight() + render->getDepth() + padding * 2;
         
-        int width = render->getWidth();
-        int height = render->getHeight();
-        if (width <= 0) width = 1;
-        if (height <= 0) height = 1;
+        if (physicalWidth <= 0) physicalWidth = 1;
+        if (physicalHeight <= 0) physicalHeight = 1;
         
-        svgGen.setSize(QSize(width, height));
-        svgGen.setViewBox(QRectF(0, 0, width, height));
+        QImage image(physicalWidth, physicalHeight, QImage::Format_ARGB32_Premultiplied);
+        image.fill(Qt::transparent);
         
-        QPainter painter(&svgGen);
+        QPainter painter(&image);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setRenderHint(QPainter::TextAntialiasing);
+        painter.setRenderHint(QPainter::SmoothPixmapTransform);
+        
         tex::Graphics2D_qt g2(&painter);
-        render->draw(g2, 0, 0);
+        render->draw(g2, padding, padding);
         painter.end();
         
-        QString svgString = QString::fromUtf8(buffer.data());
+        QByteArray ba;
+        QBuffer buffer(&ba);
+        buffer.open(QIODevice::WriteOnly);
+        image.save(&buffer, "PNG");
+        
+        // The image was rendered at 48pt (3× the 16pt base). Display at logical size.
+        int logicalWidth = physicalWidth / 3;
+        int logicalHeight = physicalHeight / 3;
+        
+        QByteArray base64Img = ba.toBase64();
+        QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) + 
+                         QStringLiteral("\" width=\"") + QString::number(logicalWidth) + 
+                         QStringLiteral("\" height=\"") + QString::number(logicalHeight) + QStringLiteral("\" />");
         
         if (m->isInline()) {
-            m_html += QStringLiteral("<span class=\"math inline\">") + svgString + QStringLiteral("</span>");
+            m_html += QStringLiteral("<span class=\"math inline\">") + imgTag + QStringLiteral("</span>");
         } else {
-            m_html += QStringLiteral("<div class=\"math block\" style=\"text-align: center;\">") + svgString + QStringLiteral("</div>");
+            m_html += QStringLiteral("<p align=\"center\">") + imgTag + QStringLiteral("</p>");
         }
         
         delete render;
@@ -75,18 +90,22 @@ void MarkdownVisitor::onCode(MD::Code *c)
 {
     QString syntax = c->syntax().toLower();
     if (c->isFensedCode() && (syntax == QStringLiteral("mermaid") || syntax == QStringLiteral("plantuml") || syntax == QStringLiteral("puml"))) {
-        QByteArray svgData;
+        QByteArray imgData;
         if (syntax == QStringLiteral("mermaid")) {
-            svgData = runMermaidWeb(c->text());
-            svgData = fixMermaidSvgText(svgData);
+            imgData = runMermaidWeb(c->text());
+            if (!imgData.isEmpty()) {
+                imgData = fixMermaidSvgText(imgData);
+            }
         } else {
-            svgData = runPlantUmlWeb(c->text());
+            imgData = runPlantUmlWeb(c->text());
         }
 
-        if (!svgData.isEmpty()) {
-            m_html.append(QStringLiteral("<div class=\"%1-diagram\">\n").arg(syntax));
-            m_html.append(QString::fromUtf8(svgData));
-            m_html.append(QStringLiteral("</div>\n"));
+        if (!imgData.isEmpty()) {
+            QByteArray base64Img = imgData.toBase64();
+            QString imgTag = QStringLiteral("<img src=\"data:image/svg+xml;base64,") + QString::fromUtf8(base64Img) + QStringLiteral("\" />");
+            m_html.append(QStringLiteral("<p align=\"center\">\n"));
+            m_html.append(imgTag);
+            m_html.append(QStringLiteral("</p>\n"));
             return;
         }
     }
@@ -96,7 +115,9 @@ void MarkdownVisitor::onCode(MD::Code *c)
 
 QByteArray MarkdownVisitor::runMermaidWeb(const QString& code)
 {
-    QByteArray base64 = code.toUtf8().toBase64();
+    QString config = QStringLiteral("%%{init: {\"flowchart\": {\"htmlLabels\": false}, \"sequence\": {\"htmlLabels\": false}, \"gantt\": {\"htmlLabels\": false}, \"journey\": {\"htmlLabels\": false}, \"class\": {\"htmlLabels\": false}, \"state\": {\"htmlLabels\": false}, \"er\": {\"htmlLabels\": false}, \"pie\": {\"htmlLabels\": false}, \"c4\": {\"htmlLabels\": false}}}%%\n");
+    QString fullCode = config + code;
+    QByteArray base64 = fullCode.toUtf8().toBase64();
     QString url = QStringLiteral("https://mermaid.ink/svg/") + QString::fromUtf8(base64.toPercentEncoding());
 
     QProcess proc;
@@ -127,10 +148,25 @@ QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
     }
     return QByteArray();
 }
-
 QByteArray MarkdownVisitor::fixMermaidSvgText(const QByteArray& svgData)
 {
     QString svgStr = QString::fromUtf8(svgData);
+    
+    QRegularExpression foreignObjRe(QStringLiteral("<foreignObject\\s+width=\"([^\"]+)\"\\s+height=\"([^\"]+)\"[^>]*>.*?<span[^>]*>(?:<p>)?(.*?)(?:</p>)?</span>.*?</foreignObject>"));
+    QRegularExpressionMatchIterator foreignIt = foreignObjRe.globalMatch(svgStr);
+    QList<QRegularExpressionMatch> foreignMatches;
+    while (foreignIt.hasNext()) {
+        foreignMatches.append(foreignIt.next());
+    }
+    for (int i = foreignMatches.size() - 1; i >= 0; --i) {
+        const QRegularExpressionMatch& match = foreignMatches.at(i);
+        double w = match.captured(1).toDouble();
+        double h = match.captured(2).toDouble();
+        QString text = match.captured(3);
+        
+        QString replacement = QStringLiteral(R"(<text x="%1" y="%2" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14px" fill="#333">%3</text>)").arg(w / 2.0).arg(h / 2.0 + 2.0).arg(text);
+        svgStr.replace(match.capturedStart(0), match.capturedLength(0), replacement);
+    }
     
     QRegularExpression textTspanRe(QStringLiteral(R"(<text\b([^>]*)>\s*<tspan\b([^>]*)>)"));
     QRegularExpressionMatchIterator it = textTspanRe.globalMatch(svgStr);
@@ -195,4 +231,42 @@ QByteArray MarkdownVisitor::fixMermaidSvgText(const QByteArray& svgData)
     }
     
     return svgStr.toUtf8();
+}
+
+QByteArray MarkdownVisitor::svgToHighDpiPng(const QByteArray& svgData, float scale, int& logicalWidth, int& logicalHeight)
+{
+    QSvgRenderer renderer(svgData);
+    if (!renderer.isValid()) return QByteArray();
+    
+    QSize defaultSize = renderer.defaultSize();
+    if (defaultSize.isEmpty()) {
+        QRectF viewBox = renderer.viewBoxF();
+        if (!viewBox.isEmpty()) {
+            defaultSize = viewBox.size().toSize();
+        } else {
+            defaultSize = QSize(800, 600);
+        }
+    }
+    
+    logicalWidth = defaultSize.width();
+    logicalHeight = defaultSize.height();
+    
+    QSize scaledSize = defaultSize * scale;
+    QImage image(scaledSize, QImage::Format_ARGB32_Premultiplied);
+    image.fill(Qt::transparent);
+    
+    QPainter painter(&image);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::TextAntialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    
+    renderer.render(&painter);
+    painter.end();
+    
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    
+    return ba;
 }

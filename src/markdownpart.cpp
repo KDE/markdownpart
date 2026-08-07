@@ -86,7 +86,7 @@ MarkdownPart::MarkdownPart(QWidget* parentWidget, QObject* parent, const KPlugin
 
     static bool microtex_initialized = false;
     if (!microtex_initialized) {
-        tex::LaTeX::init();
+        tex::LaTeX::init("/usr/share/clatexmath");
         microtex_initialized = true;
     }
 }
@@ -152,6 +152,10 @@ bool MarkdownPart::openFile()
     MD::Parser parser;
     auto doc = parser.parse(localFilePath(), true);
     QString html = MD::toHtml<MarkdownVisitor>(doc);
+    html.replace(QStringLiteral("<blockquote>"), QStringLiteral("<table border=\"0\" class=\"blockquote\" width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" bgcolor=\"#F3F3F3\" style=\"margin-left: 50px;\"><tr><td width=\"4\" bgcolor=\"#1A2B3C\" style=\"padding: 0;\"></td><td width=\"10\" style=\"padding: 0;\"></td><td>"));
+    html.replace(QStringLiteral("</blockquote>"), QStringLiteral("</td></tr></table>"));
+    html.replace(QStringLiteral("<hr />"), QStringLiteral("<hr color=\"#1A2B3C\" size=\"2\" />"));
+    html.replace(QStringLiteral("<hr>"), QStringLiteral("<hr color=\"#1A2B3C\" size=\"2\" />"));
     
     m_rawMarkdown = text;
     m_renderedHtml = html;
@@ -207,6 +211,10 @@ bool MarkdownPart::doCloseStream()
     MD::Parser parser;
     auto doc = parser.parse(stream, QString(), QString());
     QString html = MD::toHtml<MarkdownVisitor>(doc);
+    html.replace(QStringLiteral("<blockquote>"), QStringLiteral("<table border=\"0\" class=\"blockquote\" width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" bgcolor=\"#F3F3F3\" style=\"margin-left: 50px;\"><tr><td width=\"4\" bgcolor=\"#1A2B3C\" style=\"padding: 0;\"></td><td width=\"10\" style=\"padding: 0;\"></td><td>"));
+    html.replace(QStringLiteral("</blockquote>"), QStringLiteral("</td></tr></table>"));
+    html.replace(QStringLiteral("<hr />"), QStringLiteral("<hr color=\"#1A2B3C\" size=\"2\" />"));
+    html.replace(QStringLiteral("<hr>"), QStringLiteral("<hr color=\"#1A2B3C\" size=\"2\" />"));
 
     m_rawMarkdown = text;
     m_renderedHtml = html;

@@ -16,4 +16,5 @@ private:
     QByteArray runPlantUmlWeb(const QString& code);
     QByteArray fixMermaidSvgText(const QByteArray& svgData);
     QByteArray svgToHighDpiPng(const QByteArray& svgData, float scale, int& logicalWidth, int& logicalHeight);
+    QByteArray renderSvgToPngViaRsvg(const QByteArray& svgData, float zoom = 1.0f);
 };

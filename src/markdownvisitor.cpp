@@ -8,6 +8,7 @@
 #include <QSvgGenerator>
 #include <QBuffer>
 #include <QPainter>
+#include <QPixmap>
 #include <QDebug>
 
 // MicroTeX includes
@@ -28,12 +29,12 @@ void MarkdownVisitor::onMath(MD::Math *m) {
     // Parse the LaTeX string using MicroTeX.
     // textSize is in points; we oversample for smooth downscaling.
     // PIXELS_PER_POINT=1.0, so getWidth()/getHeight() return pixels at textSize.
-    constexpr int oversample = 6;
-    constexpr float baseTextSize = 16.0f; // logical display size in points/px
-    constexpr float renderTextSize = baseTextSize * oversample; // 96pt
+    constexpr int oversample = 8;
+    constexpr float baseTextSize = 20.0f; // slightly larger base → heavier strokes at display size
+    constexpr float renderTextSize = baseTextSize * oversample; // 160pt
     tex::TeXRender* render = nullptr;
     try {
-        render = tex::LaTeX::parse(tex, 0, renderTextSize, renderTextSize, 0xff1a2b3c);
+        render = tex::LaTeX::parse(tex, 0, renderTextSize, renderTextSize, 0xff000000);
     } catch (const std::exception& e) {
         qWarning() << "LaTeX parsing error:" << e.what();
     }
@@ -48,10 +49,12 @@ void MarkdownVisitor::onMath(MD::Math *m) {
         if (physicalWidth <= 0) physicalWidth = 1;
         if (physicalHeight <= 0) physicalHeight = 1;
         
-        QImage image(physicalWidth, physicalHeight, QImage::Format_ARGB32_Premultiplied);
-        image.fill(Qt::transparent);
+        // Fill with the body background colour (#FAFAFA from markdownpart.css)
+        // so the formula blends seamlessly without transparent-edge fading.
+        QPixmap pixmap(physicalWidth, physicalHeight);
+        pixmap.fill(QColor(QStringLiteral("#FAFAFA")));
         
-        QPainter painter(&image);
+        QPainter painter(&pixmap);
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setRenderHint(QPainter::TextAntialiasing);
         painter.setRenderHint(QPainter::SmoothPixmapTransform);
@@ -59,24 +62,23 @@ void MarkdownVisitor::onMath(MD::Math *m) {
         tex::Graphics2D_qt g2(&painter);
         render->draw(g2, padding, padding);
         painter.end();
+        QImage image = pixmap.toImage();
         
         QByteArray ba;
         QBuffer buffer(&ba);
         buffer.open(QIODevice::WriteOnly);
-        // Smooth-scale from the 6× render to 2× before encoding, giving
-        // QTextDocument a high-quality source image to display at 1× size.
+        // One-step smooth-scale from 8× physical to 1× logical, embedded at
+        // natural size (no width/height override). QTextDocument displays at
+        // pixel-for-pixel size with no further scaling, avoiding double-blur.
         int logicalWidth = physicalWidth / oversample;
         int logicalHeight = physicalHeight / oversample;
-        QImage scaledImage = image.scaled(logicalWidth * 2, logicalHeight * 2,
+        QImage scaledImage = image.scaled(logicalWidth, logicalHeight,
                                           Qt::KeepAspectRatio,
                                           Qt::SmoothTransformation);
         scaledImage.save(&buffer, "PNG");
         
         QByteArray base64Img = ba.toBase64();
-        // Embed at 2× pixels, display at 1× via width/height.
         QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
-                         QStringLiteral("\" width=\"") + QString::number(logicalWidth) +
-                         QStringLiteral("\" height=\"") + QString::number(logicalHeight) +
                          QStringLiteral("\" />");
         
         if (m->isInline()) {
@@ -104,43 +106,18 @@ void MarkdownVisitor::onCode(MD::Code *c)
         QByteArray imgData;
         if (syntax == QStringLiteral("mermaid")) {
             imgData = runMermaidWeb(c->text());
-            if (!imgData.isEmpty()) {
-                imgData = fixMermaidSvgText(imgData);
-            }
+            // Note: fixMermaidSvgText adjusts em-unit y positions for QSvgRenderer,
+            // but rsvg-convert handles the original SVG natively — skip it here.
         } else {
             imgData = runPlantUmlWeb(c->text());
         }
 
         if (!imgData.isEmpty()) {
-            // Pre-render the SVG to a 4× PNG with antialiasing enabled, then
-            // embed it with explicit 1× display dimensions. QTextDocument will
-            // smooth-scale the high-res source down for crisp display.
-            QSvgRenderer renderer(imgData);
-            QSize svgSize = renderer.defaultSize();
-            if (!svgSize.isValid() || svgSize.isEmpty()) {
-                svgSize = QSize(600, 400);
-            }
-            constexpr int scale = 4;
-            QImage svgImage(svgSize * scale, QImage::Format_ARGB32_Premultiplied);
-            svgImage.fill(Qt::white);
-            QPainter svgPainter(&svgImage);
-            svgPainter.setRenderHint(QPainter::Antialiasing);
-            svgPainter.setRenderHint(QPainter::SmoothPixmapTransform);
-            svgPainter.setRenderHint(QPainter::TextAntialiasing);
-            renderer.render(&svgPainter);
-            svgPainter.end();
-            // Embed the 4× PNG directly — QTextDocument's QPainter uses
-            // SmoothPixmapTransform when drawing images, so the 4:1 downscale
-            // to the display dimensions is handled with high quality.
-            QByteArray pngData;
-            QBuffer pngBuf(&pngData);
-            pngBuf.open(QIODevice::WriteOnly);
-            svgImage.save(&pngBuf, "PNG");
-            QByteArray base64Img = pngData.toBase64();
-            // Embed at 2× pixels, display at 1× via width/height.
+            // Both runMermaidWeb and runPlantUmlWeb now return PNG bytes directly
+            // from the server-side renderer (mermaid.ink/img and plantuml.com/png).
+            // Just base64-encode and embed inline.
+            QByteArray base64Img = imgData.toBase64();
             QString imgTag = QStringLiteral("<img src=\"data:image/png;base64,") + QString::fromUtf8(base64Img) +
-                             QStringLiteral("\" width=\"") + QString::number(svgSize.width()) +
-                             QStringLiteral("\" height=\"") + QString::number(svgSize.height()) +
                              QStringLiteral("\" />");
             m_html.append(QStringLiteral("<p align=\"center\">\n"));
             m_html.append(imgTag);
@@ -154,10 +131,10 @@ void MarkdownVisitor::onCode(MD::Code *c)
 
 QByteArray MarkdownVisitor::runMermaidWeb(const QString& code)
 {
-    QString config = QStringLiteral("%%{init: {\"flowchart\": {\"htmlLabels\": false}, \"sequence\": {\"htmlLabels\": false}, \"gantt\": {\"htmlLabels\": false}, \"journey\": {\"htmlLabels\": false}, \"class\": {\"htmlLabels\": false}, \"state\": {\"htmlLabels\": false}, \"er\": {\"htmlLabels\": false}, \"pie\": {\"htmlLabels\": false}, \"c4\": {\"htmlLabels\": false}}}%%\n");
-    QString fullCode = config + code;
-    QByteArray base64 = fullCode.toUtf8().toBase64();
-    QString url = QStringLiteral("https://mermaid.ink/svg/") + QString::fromUtf8(base64.toPercentEncoding());
+    // Request PNG directly from mermaid.ink — the server renders with proper
+    // font antialiasing, bypassing foreignObject/SVG rendering issues entirely.
+    QByteArray base64 = code.toUtf8().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals);
+    QString url = QStringLiteral("https://mermaid.ink/img/") + QString::fromUtf8(base64);
 
     QProcess proc;
     QStringList args;
@@ -173,8 +150,10 @@ QByteArray MarkdownVisitor::runMermaidWeb(const QString& code)
 
 QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
 {
+    // Request PNG directly from plantuml.com — the Java renderer produces
+    // crisp output without the thin-stroke aliasing issues of SVG + rsvg-convert.
     QString hexStr = QStringLiteral("~h") + QString::fromUtf8(code.toUtf8().toHex());
-    QString url = QStringLiteral("http://www.plantuml.com/plantuml/svg/") + hexStr;
+    QString url = QStringLiteral("http://www.plantuml.com/plantuml/png/") + hexStr;
 
     QProcess proc;
     QStringList args;
@@ -186,6 +165,30 @@ QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
         }
     }
     return QByteArray();
+}
+QByteArray MarkdownVisitor::renderSvgToPngViaRsvg(const QByteArray& svgData, float zoom)
+{
+    // Pipe SVG through rsvg-convert (librsvg) to get a properly antialiased PNG.
+    // rsvg-convert reads from stdin and writes PNG to stdout.
+    // zoom > 1.0 renders at a larger pixel size for better antialiasing of thin
+    // strokes; the caller is responsible for embedding with explicit display dims.
+    QProcess proc;
+    QStringList args;
+    args << QStringLiteral("--format") << QStringLiteral("png");
+    if (zoom != 1.0f) {
+        args << QStringLiteral("-z") << QString::number(zoom, 'f', 2);
+    }
+    args << QStringLiteral("-");
+    proc.start(QStringLiteral("rsvg-convert"), args);
+    if (!proc.waitForStarted(3000)) {
+        return QByteArray(); // rsvg-convert not available
+    }
+    proc.write(svgData);
+    proc.closeWriteChannel();
+    if (!proc.waitForFinished(15000) || proc.exitCode() != 0) {
+        return QByteArray();
+    }
+    return proc.readAllStandardOutput();
 }
 QByteArray MarkdownVisitor::fixMermaidSvgText(const QByteArray& svgData)
 {

@@ -55,7 +55,10 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
     GIT_TAG        master
 )
+set(BUILD_SHARED_LIBS_OLD ${BUILD_SHARED_LIBS})
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(tinyxml2)
+set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_OLD} CACHE BOOL "" FORCE)
 
 # Fetch MicroTeX and patch its CMakeLists.txt to avoid pkg-config for tinyxml2
 FetchContent_Declare(

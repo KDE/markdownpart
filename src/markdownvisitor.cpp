@@ -10,6 +10,11 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QDebug>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QEventLoop>
+#include <QUrl>
 
 // MicroTeX includes
 #include "latex.h"
@@ -123,13 +128,21 @@ void MarkdownVisitor::onCode(MD::Code *c)
                     svgStr.replace(match.capturedStart(0), match.capturedLength(0), replacement);
                 }
 
-                // Render transparent SVG via rsvg-convert at 4x to ensure high-quality thin lines
-                QByteArray pngData4x = renderSvgToPngViaRsvg(svgStr.toUtf8(), 4.0);
-                if (!pngData4x.isEmpty()) {
-                    QImage img4x;
-                    img4x.loadFromData(pngData4x);
+                // Render transparent SVG via QSvgRenderer at 4x to ensure high-quality thin lines
+                QSvgRenderer renderer(svgStr.toUtf8());
+                QSize sz = renderer.defaultSize();
+                if (!sz.isEmpty()) {
+                    QImage img4x(sz.width() * 4, sz.height() * 4, QImage::Format_ARGB32_Premultiplied);
+                    img4x.fill(Qt::transparent);
+                    QPainter p(&img4x);
+                    p.setRenderHint(QPainter::Antialiasing);
+                    p.setRenderHint(QPainter::TextAntialiasing);
+                    p.setRenderHint(QPainter::SmoothPixmapTransform);
+                    renderer.render(&p);
+                    p.end();
+
                     // Smooth-scale back to 1x to avoid QTextDocument interpolation issues (double-blur)
-                    QImage img1x = img4x.scaled(img4x.width() / 4, img4x.height() / 4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    QImage img1x = img4x.scaled(sz, Qt::KeepAspectRatio, Qt::SmoothTransformation);
                     QBuffer buffer(&imgData);
                     buffer.open(QIODevice::WriteOnly);
                     img1x.save(&buffer, "PNG");
@@ -165,16 +178,20 @@ QByteArray MarkdownVisitor::runMermaidWeb(const QString& code)
     QByteArray base64 = fullCode.toUtf8().toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals);
     QString url = QStringLiteral("https://mermaid.ink/svg/") + QString::fromUtf8(base64);
 
-    QProcess proc;
-    QStringList args;
-    args << QStringLiteral("-s") << QStringLiteral("-f") << QStringLiteral("--max-time") << QStringLiteral("15") << url;
-    proc.start(QStringLiteral("curl"), args);
-    if (proc.waitForStarted() && proc.waitForFinished(15000)) {
-        if (proc.exitCode() == 0) {
-            return proc.readAllStandardOutput();
-        }
+    QNetworkAccessManager manager;
+    QNetworkRequest request((QUrl(url)));
+    QNetworkReply *reply = manager.get(request);
+    
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    
+    QByteArray data;
+    if (reply->error() == QNetworkReply::NoError) {
+        data = reply->readAll();
     }
-    return QByteArray();
+    reply->deleteLater();
+    return data;
 }
 
 QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
@@ -191,40 +208,20 @@ QByteArray MarkdownVisitor::runPlantUmlWeb(const QString& code)
     QString hexStr = QStringLiteral("~h") + QString::fromUtf8(modifiedCode.toUtf8().toHex());
     QString url = QStringLiteral("http://www.plantuml.com/plantuml/png/") + hexStr;
 
-    QProcess proc;
-    QStringList args;
-    args << QStringLiteral("-s") << QStringLiteral("-f") << QStringLiteral("--max-time") << QStringLiteral("15") << url;
-    proc.start(QStringLiteral("curl"), args);
-    if (proc.waitForStarted() && proc.waitForFinished(15000)) {
-        if (proc.exitCode() == 0) {
-            return proc.readAllStandardOutput();
-        }
+    QNetworkAccessManager manager;
+    QNetworkRequest request((QUrl(url)));
+    QNetworkReply *reply = manager.get(request);
+    
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    
+    QByteArray data;
+    if (reply->error() == QNetworkReply::NoError) {
+        data = reply->readAll();
     }
-    return QByteArray();
-}
-QByteArray MarkdownVisitor::renderSvgToPngViaRsvg(const QByteArray& svgData, float zoom)
-{
-    // Pipe SVG through rsvg-convert (librsvg) to get a properly antialiased PNG.
-    // rsvg-convert reads from stdin and writes PNG to stdout.
-    // zoom > 1.0 renders at a larger pixel size for better antialiasing of thin
-    // strokes; the caller is responsible for embedding with explicit display dims.
-    QProcess proc;
-    QStringList args;
-    args << QStringLiteral("--format") << QStringLiteral("png");
-    if (zoom != 1.0f) {
-        args << QStringLiteral("-z") << QString::number(zoom, 'f', 2);
-    }
-    args << QStringLiteral("-");
-    proc.start(QStringLiteral("rsvg-convert"), args);
-    if (!proc.waitForStarted(3000)) {
-        return QByteArray(); // rsvg-convert not available
-    }
-    proc.write(svgData);
-    proc.closeWriteChannel();
-    if (!proc.waitForFinished(15000) || proc.exitCode() != 0) {
-        return QByteArray();
-    }
-    return proc.readAllStandardOutput();
+    reply->deleteLater();
+    return data;
 }
 QByteArray MarkdownVisitor::fixMermaidSvgText(const QByteArray& svgData)
 {
@@ -311,40 +308,3 @@ QByteArray MarkdownVisitor::fixMermaidSvgText(const QByteArray& svgData)
     return svgStr.toUtf8();
 }
 
-QByteArray MarkdownVisitor::svgToHighDpiPng(const QByteArray& svgData, float scale, int& logicalWidth, int& logicalHeight)
-{
-    QSvgRenderer renderer(svgData);
-    if (!renderer.isValid()) return QByteArray();
-    
-    QSize defaultSize = renderer.defaultSize();
-    if (defaultSize.isEmpty()) {
-        QRectF viewBox = renderer.viewBoxF();
-        if (!viewBox.isEmpty()) {
-            defaultSize = viewBox.size().toSize();
-        } else {
-            defaultSize = QSize(800, 600);
-        }
-    }
-    
-    logicalWidth = defaultSize.width();
-    logicalHeight = defaultSize.height();
-    
-    QSize scaledSize = defaultSize * scale;
-    QImage image(scaledSize, QImage::Format_ARGB32_Premultiplied);
-    image.fill(Qt::transparent);
-    
-    QPainter painter(&image);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::TextAntialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    
-    renderer.render(&painter);
-    painter.end();
-    
-    QByteArray ba;
-    QBuffer buffer(&ba);
-    buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "PNG");
-    
-    return ba;
-}

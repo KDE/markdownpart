@@ -114,14 +114,25 @@ void MarkdownVisitor::onCode(MD::Code *c)
         if (syntax == QStringLiteral("mermaid")) {
             QByteArray svgData = runMermaidWeb(c->text());
             if (!svgData.isEmpty()) {
-                svgData = fixMermaidSvgText(svgData);
+                QString svgStr = QString::fromUtf8(fixMermaidSvgText(svgData));
+                
+                // Fix QSvgRenderer not supporting rgba() colors which makes label backgrounds solid black
+                QRegularExpression rgbaRe(QStringLiteral(R"(rgba\([^)]+\))"));
+                svgStr.replace(rgbaRe, QStringLiteral("#E8E8E8"));
+                
                 // Pass scale=2 for High-DPI
-                imgData = svgToHighDpiPng(svgData, 2.0f, logicalWidth, logicalHeight);
+                imgData = svgToHighDpiPng(svgStr.toUtf8(), 2.0f, logicalWidth, logicalHeight);
             }
         } else {
             QByteArray svgData = runPlantUmlWeb(c->text());
             if (!svgData.isEmpty()) {
-                imgData = svgToHighDpiPng(svgData, 2.0f, logicalWidth, logicalHeight);
+                QString svgStr = QString::fromUtf8(svgData);
+                // PlantUML uses stroke-width:0.5 for lifelines and borders, which become barely visible 
+                // faint lines when rasterized and downscaled. Thicken them to 1.0.
+                QRegularExpression strokeRe(QStringLiteral(R"(stroke-width:0\.[0-9]+)"));
+                svgStr.replace(strokeRe, QStringLiteral("stroke-width:1.0"));
+                
+                imgData = svgToHighDpiPng(svgStr.toUtf8(), 2.0f, logicalWidth, logicalHeight);
             }
         }
 

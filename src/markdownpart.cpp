@@ -267,7 +267,7 @@ void MarkdownPart::showHoveredLink(const QUrl& _linkUrl)
         linkUrl.setUserName(QString());
         message = linkUrl.toDisplayString();
 
-        if (linkUrl.scheme() != QLatin1String("mailto")) {
+        if (!linkUrl.scheme().isEmpty() && (linkUrl.scheme() != QLatin1String("mailto"))) {
             fileItem = KFileItem(linkUrl, QString(), KFileItem::Unknown);
         }
     }

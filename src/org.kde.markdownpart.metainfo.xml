@@ -12,7 +12,7 @@
   <extends>org.kde.krusader.desktop</extends>
   <extends>org.kde.konqueror.desktop</extends>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>LGPL-2.1+</project_license>
+  <project_license>LGPL-2.1-or-later</project_license>
   <name>Markdown Viewer KPart</name>
   <name xml:lang="ar">جزء عارض مارك‌داون</name>
   <name xml:lang="ca">KPart del visualitzador de Markdown</name>
@@ -142,6 +142,8 @@
   <url type="homepage">https://commits.kde.org/markdownpart</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=markdownpart&amp;component=general</url>
   <url type="donation">https://www.kde.org/community/donations/?app=markdownpart</url>
+  <url type="vcs-browser">https://invent.kde.org/utilities/markdownpart</url>
+  <url type="contribute">https://community.kde.org/Get_Involved</url>
   <update_contact>kossebau_at_kde.org</update_contact>
   <screenshots>
     <screenshot type="default">
